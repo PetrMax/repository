@@ -1,19 +1,4 @@
 -------- creation file structure  -----------------
-\Ð½Ð¾Ð¼ÐµÑ€\Ð²Ð¾Ð¿Ñ€Ð¾Ñ�\ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ�\ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ Ñ�Ð»Ð¾Ð¶Ð½Ð¾Ñ�Ñ‚Ð¸\Ð¾Ñ‚Ð²ÐµÑ‚-1\Ð¾Ñ‚Ð²ÐµÑ‚-2\Ð¾Ñ‚Ð²ÐµÑ‚-3\Ð¾Ñ‚Ð²ÐµÑ‚-4\Ð½Ð¾Ð¼ÐµÑ€ Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð¾Ñ‚Ð²ÐµÑ‚Ð°\
+\номер\вопрос\категория\уровень сложности\ответ-1\ответ-2\ответ-3\ответ-4\номер правильного ответа\
 
-00001,ÐšÐ°ÐºÐ¾Ð³Ð¾ Ñ‚ÐµÐ³Ð° Ð�Ð• Ñ�ÑƒÑ‰ÐµÑ�Ñ‚Ð²ÑƒÐµÑ‚,html,2,<em>1,<address>2,<pre>3,<ol>4,1
-<!-- components of the books application service getting result of any query -->
-	<!-- <bean id="database" class="model.WorkActionClass" /> -->
-	<!-- ********** -->
-	<!-- Burlap Service Exporter -->
-	<bean id="xxxx"
-		class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="database" />  <!-- reference to the service -->
-		<property name="serviceInterface" value="model.ApplicationAction" /> <!-- interface of the service -->
-	</bean>
-	<!-- ********** -->
-	<!-- mapping to the application service -->
-	<bean id="urlMapping"
-		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="mappings" value="/=xxxx" />
-	</bean>
+00001,Какого тега НЕ существует,html,2,<em>1,<address>2,<pre>3,<ol>4,1
