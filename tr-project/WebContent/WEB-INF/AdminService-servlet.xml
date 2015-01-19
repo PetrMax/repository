@@ -5,7 +5,7 @@
   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
  
-<!-- components of the books application service getting result of any query -->
+<!-- components of the data base application service  -->
 <bean id="database" class="model.WorkActionClass" /> 
 
 <!-- ********** -->
