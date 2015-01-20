@@ -1,4 +1,5 @@
 package controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import log.logger;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping({"/"})
 public class MappingController {	
 	@Autowired
-	ApplicationAction apl;
+	ApplicationAction DBservice;
 
 	/** when application is run this method getting home page !! */
 	@RequestMapping({"/"})
@@ -45,13 +46,18 @@ public class MappingController {
 	 */
 	@RequestMapping({"/add_actions"})
 	public String addProcessingPage(String question_text,String category,int question_level,String answer_text ,int trueAnswerNumber,Model model){
-		model.addAttribute("result",question_text+category+question_level+answer_text+trueAnswerNumber );
-		logger.log(trueAnswerNumber);
-		
-		List<String> answer = null;
-		apl.addQuestionToDataBase(question_text, category, question_level, answer, trueAnswerNumber);
-		return "AddingPage";
 
+		model.addAttribute("result",question_text+category+question_level+answer_text+trueAnswerNumber );// text on page for testing
+
+		/**
+		 * the way from client to service this method is returning boolean
+		 */
+		List<String> answer = new ArrayList<String>();
+		answer.add("question answer");	
+		DBservice.createQuestion(question_text, category, question_level, answer, trueAnswerNumber);
+
+
+		return "AddingPage"; // return too page after action
 	}
 
 	/**
@@ -62,9 +68,15 @@ public class MappingController {
 	 */
 	@RequestMapping({"/update_actions"})
 	public String updateProcessingPage(String test_text, Model model){	
-		model.addAttribute("result", test_text);
-		logger.log(test_text);		
-		return "UpdatePage";
+
+		model.addAttribute("result", test_text);// text on page for testing
+
+		/**
+		 * the way from client to service this method is returning boolean
+		 */
+		DBservice.UpdateQuestionInDataBase(null, null, 0, null, 0);
+
+		return "UpdatePage";// return too page after action
 	}
 
 	/**
@@ -75,10 +87,9 @@ public class MappingController {
 	@RequestMapping({"/add_from_file_actions"})
 	public String addFromFileProcessingPage(String file_name, Model model){
 		String res = "addFromFile";
-		model.addAttribute("result", file_name);
+		model.addAttribute("result", file_name);// text on page for testing
 		logger.log(file_name);
 		res = "HomePage";
-		return 	res;
+		return 	res;// return too page after action
 	}
-
 }

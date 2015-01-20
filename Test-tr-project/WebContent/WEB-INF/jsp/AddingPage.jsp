@@ -30,7 +30,7 @@ body {
 		input Answer to this Question<br> <input type="text"
 			name="answer_text" value="input text here"> <br> Please
 		input number a right question answer<br> <input type="text"
-			name="trueAnswerNumber"><br> <input type="submit">
+			name="trueAnswerNumber" value="058450405500"><br> <input type="submit">
 	</form>
 	<br>	
 	<script type="text/javascript">
