@@ -2,8 +2,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,8 +89,9 @@ public class MappingController {
 	 */
 	@RequestMapping({"/add_from_file_actions"})
 	public String addFromFileProcessingPage(String file_name, Model model){
-		String res = "addFromFile";
-		model.addAttribute("result", file_name);// text on page for testing
+		String res = "addFromFile";		
+		boolean actionRes = DBservice.AddQuestionsFromFile(file_name);
+		model.addAttribute("result"," adding is-"+actionRes);// text on page for testing	
 		res = "HomePage";
 		return 	res;// return too page after action
 	}
