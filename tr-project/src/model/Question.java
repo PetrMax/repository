@@ -1,28 +1,40 @@
 package model;
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import log.logger;
 @Entity
 public class Question {
-	// вообще не менял этот класс , !!!! с него надо начать !!!!
-@Id
-String question;
+	public Question() {
+		logger.log("question constructor");
+	}
+	@Id 	
+	String question;
 
-@ManyToMany
-List<Answer>answers;
+	String category;
 
-@ManyToOne
-Category publisher;
+	int level;
 
-/*public String getTitle() {
-	return question;
-}
-
-public void setTitle(String title) {
-	this.question = title;
-}
-*/
-
-
-
+	protected String getQuestion() {
+		return question;
+	}
+	protected void setQuestion(String question) {
+		this.question = question;
+	}
+	protected String getCategory() {
+		return category;
+	}
+	protected void setCategory(String category) {
+		this.category = category;
+	}
+	protected int getLevel() {
+		return level;
+	}
+	protected void setLevel(int level) {
+		this.level = level;
+	}
+	@Override
+	public String toString() {
+		return "Question " + question + ", category=" + category
+				+ ", level=" + level;
+	}
 }

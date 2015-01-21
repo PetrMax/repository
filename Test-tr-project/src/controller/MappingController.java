@@ -45,15 +45,20 @@ public class MappingController {
 	 * @return
 	 */
 	@RequestMapping({"/add_actions"})
-	public String addProcessingPage(String question_text,String category,int question_level,String answer_text ,int trueAnswerNumber,Model model){
+	public String addProcessingPage(String question_text,String category,int question_level,String answer_text_1,String answer_text_2,String answer_text_3,String answer_text_4 ,int trueAnswerNumber,Model model){
 
-		model.addAttribute("result",question_text+category+question_level+answer_text+trueAnswerNumber );// text on page for testing
+		model.addAttribute("result",question_text+category+question_level+answer_text_1+trueAnswerNumber );// text on page for testing
 
 		/**
 		 * the way from client to service this method is returning boolean
 		 */
+
 		List<String> answer = new ArrayList<String>();
-		answer.add("question answer");	
+		answer.add(answer_text_1);
+		answer.add(answer_text_2);
+		answer.add(answer_text_3);
+		answer.add(answer_text_4);
+
 		DBservice.createQuestion(question_text, category, question_level, answer, trueAnswerNumber);
 
 

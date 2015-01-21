@@ -13,7 +13,7 @@ body {
 </style>
 
 </head>
-<body >
+<body>
 	Please input question text
 	<form action="add_actions">
 		<input type="text" name="question_text" value="input text here">
@@ -27,12 +27,17 @@ body {
 			type="radio" name="question_level" value=3> 4<input
 			type="radio" name="question_level" value=4> 5<input
 			type="radio" name="question_level" value=5> <br> Please
-		input Answer to this Question<br> <input type="text"
-			name="answer_text" value="input text here"> <br> Please
-		input number a right question answer<br> <input type="text"
-			name="trueAnswerNumber" value="058450405500"><br> <input type="submit">
+		input Answer to this Question<br> Answer 1 <input type="text"
+			name="answer_text_1" value="input text here"> <br>
+		Answer 2 <input type="text" name="answer_text_2"
+			value="input text here"> <br> Answer 3 <input
+			type="text" name="answer_text_3" value="input text here"> <br>
+		Answer 4 <input type="text" name="answer_text_4"
+			value="input text here"> <br>Please input number a right
+		question answer<br> <input type="text" name="trueAnswerNumber"
+			value="0584"><br> <input type="submit">
 	</form>
-	<br>	
+	<br>
 	<script type="text/javascript">
 		document.write("${result}");
 	</script>

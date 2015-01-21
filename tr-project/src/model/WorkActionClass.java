@@ -13,15 +13,39 @@ import org.springframework.transaction.annotation.Transactional;
 public class WorkActionClass implements ApplicationAction {
 	@PersistenceContext(unitName="springHibernate", type=PersistenceContextType.EXTENDED)
 	EntityManager em;
-
+int j=0;
 	@Override
-//	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	
-	public boolean createQuestion(String question, String category,
-			int level, List<String> answers, int trueAnswerNumber) {
-		// TODO Auto-generated method stub
-		// в этот метод надо  вписать действия по проверкам перед добавлением и само добавление в базу данных нового вопроса
-		System.out.println(question + " "+category+" "+trueAnswerNumber+" "+answers);
-		return false;
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	
+	public boolean createQuestion(String question, String category,	int level, List<String> answers, int trueAnswerNumber) {
+		boolean result = false;
+		if(em.find(Question.class, question) == null){
+			Question qwtemp = new Question();
+			qwtemp.setQuestion(question);
+			qwtemp.setCategory(category);
+			qwtemp.setLevel(level);
+			Answer temp = new Answer();
+			addAnswersList(answers,temp);
+			em.persist(qwtemp);
+			result = true;
+		}	
+		System.out.println(question + " "+category+" "+level+" "+answers+" "+trueAnswerNumber);
+		return result;
+	}
+
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)	
+	private void addAnswersList(List<String> answers,Answer answer) {
+		int i = 0;	
+		String[]str = new String[answers.size()];
+		for(String r:answers){
+			str[i++] = r;
+			answer.setSearchKey("key_"+j);
+		}
+		answer.setAnswer_1(str[0]);
+		answer.setAnswer_2(str[1]);
+		answer.setAnswer_3(str[2]);
+		answer.setAnswer_4(str[3]);
+		j++;
+		em.persist(answer);
 	}
 
 	@Override
