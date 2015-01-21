@@ -2,7 +2,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import log.logger;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -93,7 +93,6 @@ public class MappingController {
 	public String addFromFileProcessingPage(String file_name, Model model){
 		String res = "addFromFile";
 		model.addAttribute("result", file_name);// text on page for testing
-		logger.log(file_name);
 		res = "HomePage";
 		return 	res;// return too page after action
 	}

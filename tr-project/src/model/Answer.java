@@ -2,12 +2,11 @@ package model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import log.logger;
+
 @Entity
 public class Answer {
 	public Answer() {
-		logger.log("Answer constructor");
-	}
+			}
 
 	@Id
 	String searchKey;

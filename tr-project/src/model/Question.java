@@ -1,11 +1,11 @@
 package model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import log.logger;
+
 @Entity
 public class Question {
 	public Question() {
-		logger.log("question constructor");
+		
 	}
 	@Id 	
 	String question;
