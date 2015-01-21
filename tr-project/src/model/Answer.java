@@ -1,19 +1,17 @@
 package model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-
 @Entity
 public class Answer {
-	public Answer() {
-			}
+	public Answer() {}
 
 	@Id
-	String searchKey;
-	String answer_1;
-	String answer_2;
-	String answer_3;
-	String answer_4;
+	protected String searchKey;
+	protected String answer_1;
+	protected String answer_2;
+	protected String answer_3;
+	protected String answer_4;
+	protected int answer; // this is true answer number 
 	protected String getSearchKey() {
 		return searchKey;
 	}
@@ -44,10 +42,17 @@ public class Answer {
 	protected void setAnswer_4(String answer_4) {
 		this.answer_4 = answer_4;
 	}
+	protected int getAnswer() {
+		return answer;
+	}
+	protected void setAnswer(int answer) {
+		this.answer = answer;
+	}
 	@Override
 	public String toString() {
-		return "Answer " + " answer_1=" + answer_1
+		return "Answer " + searchKey + ", answer_1=" + answer_1
 				+ ", answer_2=" + answer_2 + ", answer_3=" + answer_3
-				+ ", answer_4=" + answer_4;
+				+ ", answer_4=" + answer_4 + ", answer=" + answer;
 	}
+
 }

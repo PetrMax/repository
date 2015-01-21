@@ -11,23 +11,29 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 public class WorkActionClass implements ApplicationAction {
+	
 	@PersistenceContext(unitName="springHibernate", type=PersistenceContextType.EXTENDED)
-	EntityManager em;
-int j=0;
+	protected EntityManager em;
+	protected int j=0;
+	
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	
 	public boolean createQuestion(String question, String category,	int level, List<String> answers, int trueAnswerNumber) {
 		boolean result = false;
-		if(em.find(Question.class, question) == null){
-			Question qwtemp = new Question();
+		if(em.find(Question.class, question) == null){// searching  if question not exist
+			Question qwtemp = new Question();// creating table question and setting data
 			qwtemp.setQuestion(question);
 			qwtemp.setCategory(category);
 			qwtemp.setLevel(level);
-			Answer temp = new Answer();
-			addAnswersList(answers,temp);
-			em.persist(qwtemp);
-			result = true;
-		}	
+
+			Answer temp = new Answer();// creating table answer
+			temp.setAnswer(trueAnswerNumber);// adding to answers number true answer
+			addAnswersList(answers,temp); // adding answers to answer table as 1 row
+
+			em.persist(qwtemp);// sending to database
+			result = true;// return to client result of operation
+		}
+		// small test case for showing a work transfer protocols
 		System.out.println(question + " "+category+" "+level+" "+answers+" "+trueAnswerNumber);
 		return result;
 	}
@@ -49,34 +55,39 @@ int j=0;
 	}
 
 	@Override
-	//@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
+	//@Transactional(readOnly=false, propagation=Propagation.REQUIRED)  //<<---это надо разкоментировать когда будет написан метод !!!!!! WARNING
 	public boolean UpdateQuestionInDataBase(String question, String category,
 			int level, List<String> answers, int trueAnswerNumber) {
-		// TODO Auto-generated method stub
+		
 		// в этот метод надо  вписать действия по проверкам перед обновлением и само обновление  базы данных
 		System.out.println(question + " "+category+" "+trueAnswerNumber+" "+answers);		
 		return false;
 	}
 
-	@Override
-	//@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
+	
+	@Override	
 	public boolean AddQuestionsFromFile(String FileName) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;		
+		try {
+			new AddFromFile(FileName);
+			res = true;
+		} catch (Exception e) {		
+			e.printStackTrace();			
+		}		
+		return res;
 	}
 
 	// методы которым надо придумать применение для возврата других результатов согласно проэкту
 	// возможно использование при обновлении чтоб вернуть выбранный вопрос администратору для работы с ним
 	@Override
 	public String[] getAnySingleQuery(String strQuery) {
-		Query query=em.createQuery(strQuery);
+		Query query=em.createQuery(strQuery);		
 		List <Object> result =query.getResultList();
 		String [] array= new String[result.size()];
 		int index=0;
 		for( Object obj:result)
 			array[index++]=obj.toString();
 		return array;
-
 	}
 
 	@Override
