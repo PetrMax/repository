@@ -4,9 +4,10 @@ import javax.persistence.Id;
 
 @Entity
 public class Question {
-	public Question() {
-		
-	}
+	public Question() {	}
+	
+	@One-To-Many(MappedBy "question")
+	List<Answer> answers;
 	@Id 	
 	String question;
 
