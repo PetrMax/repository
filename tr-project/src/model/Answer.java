@@ -5,7 +5,10 @@ import javax.persistence.Id;
 public class Answer {
 	public Answer() {}
 	
-	@Id
+	@Many-To-One
+        Question question;
+        
+	@Id(GeneratedValue)
 	protected long id;// auto genereted
         protected int num; // number of answer 
 	protected String textAnswer;
