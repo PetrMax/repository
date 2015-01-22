@@ -7,7 +7,7 @@ public class Answer {
 	
 	@Id
 	protected long id;// auto genereted
-        protected int num; 
+        protected int num; // number of answer 
 	protected String textAnswer;
 	protected boolean answer; // this is true answer number 
 
