@@ -6,6 +6,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Answer {
 	public Answer() {}
+<<<<<<< HEAD
 	@Id
 	@GeneratedValue
 	protected long keyQuestion;
@@ -53,6 +54,17 @@ public class Answer {
 				+ ", answer=" + answer + ", answerText=" + answerText + ", quest="
 				+ quest;
 	}
+=======
+	
+	@Many-To-One
+        Question question;
+        
+	@Id(GeneratedValue)
+	protected long id;// auto genereted
+        protected int num; // number of answer 
+	protected String textAnswer;
+	protected boolean answer; // this is true answer number 
+>>>>>>> origin/master
 
 
 }
