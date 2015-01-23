@@ -7,13 +7,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Question {
 	public Question() {	}
-<<<<<<< HEAD
-
-=======
-	
-	@One-To-Many(MappedBy "question")
-	List<Answer> answers;
->>>>>>> origin/master
 	@Id 	
 	String question;
 	String category;
