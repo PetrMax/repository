@@ -1,19 +1,20 @@
 package model;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
 @Entity
 public class Question {
-	public Question() {
-		
-	}
+	public Question() {	}
+
 	@Id 	
 	String question;
-
 	String category;
-
 	int level;
 
+	@OneToMany(mappedBy = "quest")
+	List<Answer> answers;
 	protected String getQuestion() {
 		return question;
 	}

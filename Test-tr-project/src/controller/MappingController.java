@@ -57,7 +57,7 @@ public class MappingController {
 		answer.add(answer_text_3);
 		answer.add(answer_text_4);
 
-		DBservice.createQuestion(question_text, category, question_level, answer, trueAnswerNumber);
+		boolean res = DBservice.createQuestion(question_text, category, question_level, answer, trueAnswerNumber);
 
 
 		return "AddingPage"; // return too page after action
@@ -65,23 +65,20 @@ public class MappingController {
 
 	/**
 	 * 
-	 * @param test_text
+	 * @param category
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping({"/update_actions"})
-	public String updateProcessingPage(String test_text, Model model){	
-
-		model.addAttribute("result", test_text);// text on page for testing
-
+	public String updateProcessingPage(String category, String free_question, Model model){	
 		/**
 		 * the way from client to service this method is returning boolean
 		 */
-		DBservice.UpdateQuestionInDataBase(null, null, 0, null, 0);
-
-		return "UpdatePage";// return too page after action
+		boolean res = DBservice.UpdateQuestionInDataBase( free_question,category);		
+		model.addAttribute("result", "you'r choice ->"+ category +"  "+ res);// text on page for testing
+		
+		return "UpdatePage";// returning too page after action
 	}
-
 	/**
 	 * @param file_name
 	 * @param model
@@ -91,7 +88,7 @@ public class MappingController {
 	public String addFromFileProcessingPage(String file_name, Model model){
 		String res = "addFromFile";		
 		boolean actionRes = DBservice.AddQuestionsFromFile(file_name);
-		model.addAttribute("result"," adding is-"+actionRes);// text on page for testing	
+		model.addAttribute("result"," Adding Questions is - "+actionRes);// text on page for testing	
 		res = "HomePage";
 		return 	res;// return too page after action
 	}

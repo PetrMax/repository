@@ -17,7 +17,10 @@ body {
 <body>
 
 	<form action="update_actions">
-		<input type="text" name="test_text"> <input type="submit">
+	<input type="text" name="free_question" value="free question" size="50"> <input type="submit" value="SEARCH"><br>
+		<br><input type="text" name="category" value="java"> <input type="submit" value="Select Category">
+		
+		
 	</form>
 <br>
 	<script type="text/javascript">

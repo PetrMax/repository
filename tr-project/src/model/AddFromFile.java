@@ -1,20 +1,23 @@
 package model;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import log.logger;
 
 public class AddFromFile {
-	FileInputStream file;
-	StringBuffer sb;
-	public AddFromFile(){
+	protected BufferedReader input;
+	protected FileReader file;
+
+	public  AddFromFile(String filename) {	
+		q=new Question();
+		an=new Answer();
+		d=new WorkActionClass();
 		try {
-			file = new FileInputStream("d");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			file = new FileReader("/"+filename);
+			input = new BufferedReader(file); 
+			
+		} catch (Exception e) {		
+			e.printStackTrace();			
 		}
 	}
-
-
-
 }

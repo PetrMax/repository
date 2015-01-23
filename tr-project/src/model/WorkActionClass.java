@@ -1,5 +1,4 @@
 package model;
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,11 +10,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 public class WorkActionClass implements ApplicationAction {
-	
+
 	@PersistenceContext(unitName="springHibernate", type=PersistenceContextType.EXTENDED)
 	protected EntityManager em;
-	protected int j=0;
-	
+	protected int j=1;
+
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	
 	public boolean createQuestion(String question, String category,	int level, List<String> answers, int trueAnswerNumber) {
@@ -24,47 +23,45 @@ public class WorkActionClass implements ApplicationAction {
 			Question qwtemp = new Question();// creating table question and setting data
 			qwtemp.setQuestion(question);
 			qwtemp.setCategory(category);
-			qwtemp.setLevel(level);
-
-			Answer temp = new Answer();// creating table answer
-			temp.setAnswer(trueAnswerNumber);// adding to answers number true answer
-			addAnswersList(answers,temp); // adding answers to answer table as 1 row
-
+			qwtemp.setLevel(level);	
+			
+			for(String str :answers){
+				addAnswersList(str,trueAnswerNumber); // adding answer
+			}
+			j=1;			
 			em.persist(qwtemp);// sending to database
 			result = true;// return to client result of operation
-		}
+		}	// else flow 
+		
 		// small test case for showing a work transfer protocols
-		System.out.println(question + " "+category+" "+level+" "+answers+" "+trueAnswerNumber);
+		System.out.println(question + "<-->"+category+"<-->"+level+"<-->"+answers+"<-->"+trueAnswerNumber);
 		return result;
 	}
 
-	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)	
-	private void addAnswersList(List<String> answers,Answer answer) {
-		int i = 0;	
-		String[]str = new String[answers.size()];
-		for(String r:answers){
-			str[i++] = r;
-			answer.setSearchKey("key_"+j);
+	private void addAnswersList(String answer, int trueAnswerNumber) {		
+		Answer temp = new Answer();// creating table answer
+		temp.setAnswerText(answer);// adding text answer 
+		if(trueAnswerNumber == (int)j){
+			temp.setAnswer(true);// adding boolean if true/false this answer 
+		}else{
+			temp.setAnswer(false);// adding boolean if true/false this answer 
 		}
-		answer.setAnswer_1(str[0]);
-		answer.setAnswer_2(str[1]);
-		answer.setAnswer_3(str[2]);
-		answer.setAnswer_4(str[3]);
-		j++;
-		em.persist(answer);
+		temp.setNumberOfAnswer(j++);
+		em.persist(temp);
 	}
 
 	@Override
 	//@Transactional(readOnly=false, propagation=Propagation.REQUIRED)  //<<---это надо разкоментировать когда будет написан метод !!!!!! WARNING
-	public boolean UpdateQuestionInDataBase(String question, String category,
-			int level, List<String> answers, int trueAnswerNumber) {
+	public boolean UpdateQuestionInDataBase(String question, String category) {
 		
-		// в этот метод надо  вписать действия по проверкам перед обновлением и само обновление  базы данных
-		System.out.println(question + " "+category+" "+trueAnswerNumber+" "+answers);		
-		return false;
+		// method for Paula and Oleg	
+		
+		boolean result = false;		
+		//TO DO: method generated stub
+		System.out.println(question + " "+category);		
+		return result;
 	}
-
-	
+		
 	@Override	
 	public boolean AddQuestionsFromFile(String FileName) {
 		boolean res = false;		
@@ -72,13 +69,28 @@ public class WorkActionClass implements ApplicationAction {
 			new AddFromFile(FileName);
 			res = true;
 		} catch (Exception e) {		
-			e.printStackTrace();			
+			e.printStackTrace();
 		}		
 		return res;
 	}
-
+	//===== mysql query methods 
 	// методы которым надо придумать применение для возврата других результатов согласно проэкту
 	// возможно использование при обновлении чтоб вернуть выбранный вопрос администратору для работы с ним
+	@Override
+	public List<Object> getAnySinglQuery(String strQuery) {
+		Query query=em.createQuery(strQuery);		
+		List <Object> result =query.getResultList();		
+		return result;
+	}
+
+	@Override
+	public List<Object[]> getAnyMultiplQuery(String strQuery ) {
+		Query query=em.createQuery(strQuery);
+		List <Object[]> result =query.getResultList();		
+		return result;
+	}	
+	
+	// то же самое только возвращает массив стринг 
 	@Override
 	public String[] getAnySingleQuery(String strQuery) {
 		Query query=em.createQuery(strQuery);		
@@ -104,5 +116,7 @@ public class WorkActionClass implements ApplicationAction {
 		}
 		return array;
 	}	
+	
+	
 }
 
