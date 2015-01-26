@@ -10,21 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
-
-import log.logger;
-
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-
-
-
-
-
-
-
-
-
 import database.DatabaseConnection;
 
 public class WorkActionClass implements ApplicationAction {
@@ -67,32 +54,23 @@ public class WorkActionClass implements ApplicationAction {
 		temp.setNumberOfAnswer(j++);
 		em.persist(temp);// добавляем данные в БД
 	}
-
 	@SuppressWarnings("unchecked")
 	@Override	
 	public String UpdateQuestionInDataBase(String question, String category) {
 		StringBuffer str;		
 		List<Object> res = em.createQuery(
 				"SELECT c FROM Question c WHERE c.question LIKE :custName").setParameter("custName","%"+question+"%").getResultList();// return to client result of operation
-		//logger.log(res);
-		str = new StringBuffer();
+			str = new StringBuffer();
 		str.append("<table style='border:0.1em solid black; width:100%;'>");
 		for( Object obj:res){			
 			str.append("<tr><td style='border:0.1em solid black;'>"+obj.toString()+"</tr></td>");
 		}	
 		str.append("</table><br>");
-
-		// small test case for showing a work transfer protocols in console eclipse
-		//System.out.println(question + " "+category);
-		//logger.log(str.toString());
 		return str.toString();
 	}
-
-
 	@SuppressWarnings("resource")
 	@Override	
 	public boolean AddQuestionsFromFile(String FileName) {
-		logger.log(FileName);
 		BufferedReader input;		
 		boolean res = false;		
 		try {			
@@ -100,7 +78,6 @@ public class WorkActionClass implements ApplicationAction {
 			String line; 
 			while((line = input.readLine()) != null){ 
 				String[] question_Parts = line.split(",,"); 
-				logger.log(question_Parts);
 				res = true;
 				if(question_Parts.length == 9){
 					int level = Integer.parseInt(question_Parts[3]);
