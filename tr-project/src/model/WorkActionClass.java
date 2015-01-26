@@ -19,8 +19,6 @@ public class WorkActionClass implements ApplicationAction {
 	@PersistenceContext(unitName="springHibernate", type=PersistenceContextType.EXTENDED)
 	protected EntityManager em;// наш менеджер для работы с добавлением  и обновлением базы данных вопросов и других параметров
 	protected int j=1;// счетчик правильного вопроса 
-	static private final String USER="root";
-	static private String PASSWORD ="12345.com";
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	// работа с транзакциями 
 	public boolean createQuestion(String question, String category,	int level, List<String> answers, int trueAnswerNumber) {
