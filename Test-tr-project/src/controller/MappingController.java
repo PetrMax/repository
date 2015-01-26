@@ -71,7 +71,7 @@ public class MappingController {
 	@RequestMapping({"/update_actions"})
 	public String updateProcessingPage(String category, String free_question, Model model){	
 		/** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.
-		 * Возвращает
+		 * Возвращает готовую форму для размещения в в таге див (например).
 		 */
 		String result = DBservice.UpdateQuestionInDataBase(free_question, category);
 		model.addAttribute("result", result);// text on page for testing
