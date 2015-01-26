@@ -23,7 +23,7 @@ body{
 	</form>	
 	<br>
 	<script type="text/javascript">
-		document.write("${result}");
+		document.write("${result}");//вывод текста
 	</script>
 </body>
 </html>

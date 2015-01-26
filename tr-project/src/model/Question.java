@@ -7,6 +7,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Question {
 	public Question() {	}
+
 	@Id 	
 	String question;
 	String category;

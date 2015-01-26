@@ -8,7 +8,6 @@
 	<!-- components of the books application service getting result of any query -->
 	<bean id="test" class="model.WorkActionClass">
 	</bean>
-
 	<!-- ********** -->
 	<!-- Burlap Service Exporter -->
 	<bean id="burlapActionService"

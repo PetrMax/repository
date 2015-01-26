@@ -1,4 +1,9 @@
 package model;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -6,17 +11,31 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
+import log.logger;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
+
+
+
+
+
+
+
+import database.DatabaseConnection;
 
 public class WorkActionClass implements ApplicationAction {
 
 	@PersistenceContext(unitName="springHibernate", type=PersistenceContextType.EXTENDED)
-	protected EntityManager em;
-	protected int j=1;
-
+	protected EntityManager em;// наш менеджер для работы с добавлением  и обновлением базы данных вопросов и других параметров
+	protected int j=1;// счетчик правильного вопроса 
+	static private final String USER="root";
+	static private String PASSWORD ="12345.com";
 	@Override
-	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	// работа с транзакциями 
 	public boolean createQuestion(String question, String category,	int level, List<String> answers, int trueAnswerNumber) {
 		boolean result = false;
 		if(em.find(Question.class, question) == null){// searching  if question not exist
@@ -24,20 +43,19 @@ public class WorkActionClass implements ApplicationAction {
 			qwtemp.setQuestion(question);
 			qwtemp.setCategory(category);
 			qwtemp.setLevel(level);	
-			
+			//обходим лист стрингов который пришел как параметер  List<String> answers и добавляем ответы в БД
 			for(String str :answers){
-				addAnswersList(str,trueAnswerNumber); // adding answer
+				addAnswersList(str,trueAnswerNumber); // с помощью Этого метода // adding answer
 			}
 			j=1;			
 			em.persist(qwtemp);// sending to database
 			result = true;// return to client result of operation
-		}	// else flow 
-		
+		}		
 		// small test case for showing a work transfer protocols
-		System.out.println(question + "<-->"+category+"<-->"+level+"<-->"+answers+"<-->"+trueAnswerNumber);
+		System.out.println(question + " "+category+" "+level+" "+answers+" "+trueAnswerNumber);
 		return result;
 	}
-
+	int flag = 0;
 	private void addAnswersList(String answer, int trueAnswerNumber) {		
 		Answer temp = new Answer();// creating table answer
 		temp.setAnswerText(answer);// adding text answer 
@@ -47,76 +65,63 @@ public class WorkActionClass implements ApplicationAction {
 			temp.setAnswer(false);// adding boolean if true/false this answer 
 		}
 		temp.setNumberOfAnswer(j++);
-		em.persist(temp);
+		em.persist(temp);// добавляем данные в БД
 	}
 
-	@Override
-	//@Transactional(readOnly=false, propagation=Propagation.REQUIRED)  //<<---это надо разкоментировать когда будет написан метод !!!!!! WARNING
-	public boolean UpdateQuestionInDataBase(String question, String category) {
-		
-		// method for Paula and Oleg	
-		
-		boolean result = false;		
-		//TO DO: method generated stub
-		System.out.println(question + " "+category);		
-		return result;
+	@SuppressWarnings("unchecked")
+	@Override	
+	public String UpdateQuestionInDataBase(String question, String category) {
+		StringBuffer str;		
+		List<Object> res = em.createQuery(
+				"SELECT c FROM Question c WHERE c.question LIKE :custName").setParameter("custName","%"+question+"%").getResultList();// return to client result of operation
+		//logger.log(res);
+		str = new StringBuffer();
+		str.append("<table style='border:0.1em solid black; width:100%;'>");
+		for( Object obj:res){			
+			str.append("<tr><td style='border:0.1em solid black;'>"+obj.toString()+"</tr></td>");
+		}	
+		str.append("</table><br>");
+
+		// small test case for showing a work transfer protocols in console eclipse
+		//System.out.println(question + " "+category);
+		//logger.log(str.toString());
+		return str.toString();
 	}
-		
+
+
+	@SuppressWarnings("resource")
 	@Override	
 	public boolean AddQuestionsFromFile(String FileName) {
+		logger.log(FileName);
+		BufferedReader input;		
 		boolean res = false;		
-		try {
-			new AddFromFile(FileName);
-			res = true;
+		try {			
+			input = new BufferedReader(new FileReader("D:/developer-workspaces/out_project/tr-project/"+FileName)); 
+			String line; 
+			while((line = input.readLine()) != null){ 
+				String[] question_Parts = line.split(",,"); 
+				logger.log(question_Parts);
+				res = true;
+				if(question_Parts.length == 9){
+					int level = Integer.parseInt(question_Parts[3]);
+					int trueAnswerNumber = Integer.parseInt(question_Parts[8]); 
+					List<String> answer = new ArrayList<String>();
+					answer.add(question_Parts[4]);
+					answer.add(question_Parts[5]);
+					answer.add(question_Parts[6]);
+					answer.add(question_Parts[7]);
+					createQuestion(question_Parts[1], question_Parts[2], level, answer, trueAnswerNumber);
+				}else{
+					res = false;
+					System.out.println(" format this line not correct  "+ question_Parts.length);
+				}
+			}			
+			
 		} catch (Exception e) {		
 			e.printStackTrace();
 		}		
 		return res;
 	}
-	//===== mysql query methods 
-	// методы которым надо придумать применение для возврата других результатов согласно проэкту
-	// возможно использование при обновлении чтоб вернуть выбранный вопрос администратору для работы с ним
-	@Override
-	public List<Object> getAnySinglQuery(String strQuery) {
-		Query query=em.createQuery(strQuery);		
-		List <Object> result =query.getResultList();		
-		return result;
-	}
 
-	@Override
-	public List<Object[]> getAnyMultiplQuery(String strQuery ) {
-		Query query=em.createQuery(strQuery);
-		List <Object[]> result =query.getResultList();		
-		return result;
-	}	
-	
-	// то же самое только возвращает массив стринг 
-	@Override
-	public String[] getAnySingleQuery(String strQuery) {
-		Query query=em.createQuery(strQuery);		
-		List <Object> result =query.getResultList();
-		String [] array= new String[result.size()];
-		int index=0;
-		for( Object obj:result)
-			array[index++]=obj.toString();
-		return array;
-	}
-
-	@Override
-	public String[] getAnyMultipleQuery(String strQuery ) {
-		Query query=em.createQuery(strQuery);
-		List <Object[]> result =query.getResultList();
-		String [] array= new String[result.size()];
-		int ind=0;
-		for(Object[] arObj:result){
-			String strResult =arObj[0].toString();
-			for(int i=1;i<arObj.length;i++)
-				strResult+=" "+arObj[i].toString();
-			array[ind++]=strResult;
-		}
-		return array;
-	}	
-	
-	
 }
 

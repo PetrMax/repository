@@ -6,7 +6,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Answer {
 	public Answer() {}
-
 	@Id
 	@GeneratedValue
 	protected long keyQuestion;
@@ -54,4 +53,6 @@ public class Answer {
 				+ ", answer=" + answer + ", answerText=" + answerText + ", quest="
 				+ quest;
 	}
+
+
 }
