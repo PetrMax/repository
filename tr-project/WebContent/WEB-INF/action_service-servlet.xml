@@ -5,7 +5,8 @@
   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
 
-	<!-- components of the books application service getting result of any query -->
+	<!-- Ошибка при создании этого бина говорит о том что у вас проблемы с базой данных !!!
+	и или с джар файлами в папке либ в обоих проэктах!!! важно ничего тут не менять ибо работает пока только так :) -->
 	<bean id="test" class="model.WorkActionClass">
 	</bean>
 	<!-- ********** -->
