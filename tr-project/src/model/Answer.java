@@ -49,9 +49,7 @@ public class Answer {
 	}
 	@Override
 	public String toString() {
-		return "Answer, nimberOfAnswer=" + numberOfAnswer
-				+ ", answer=" + answer + ", answerText=" + answerText + ", quest="
-				+ quest;
+		return answerText;
 	}
 
 

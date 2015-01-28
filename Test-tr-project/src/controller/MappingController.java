@@ -2,6 +2,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import log.logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class MappingController {
 
 	/** ДОБАВЛЕНИЕ НОВОГО ВОПРОСА В БАЗУ ДАННЫХ */
 	@RequestMapping({"/add_actions"})
-	public String addProcessingPage(String question_text,String category,int question_level,String answer_text_1,String answer_text_2,String answer_text_3,String answer_text_4 ,int trueAnswerNumber,Model model){
+	public String addProcessingPage(String question_text,String sample_question_text,String category,int question_level,String answer_text_1,String answer_text_2,String answer_text_3,String answer_text_4 ,int trueAnswerNumber,Model model){
 		/**Имена переменных приходящих в этот метод !!! ВАЖНО!!! Это Аттрибут тага: name="" должно быть соответствие полное!!!
 		 * количество неограничено.
 		 * Имя  же самого метода public String addProcessingPage() и других методов этого класса,
@@ -46,7 +48,7 @@ public class MappingController {
 
 		boolean actionRes = false; // флаг работы апликации
 		try {
-			actionRes = DBservice.createQuestion(question_text,
+			actionRes = DBservice.createQuestion(question_text,sample_question_text,
 					category, question_level, answer, trueAnswerNumber);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -58,7 +60,7 @@ public class MappingController {
 			// написать альтернативный путь !!!
 		}
 
-		model.addAttribute("result",question_text+category+question_level+answer_text_1+trueAnswerNumber );// вывод текста
+		model.addAttribute("result",question_text+sample_question_text+category+question_level+answer_text_1+trueAnswerNumber );// вывод текста
 		/**ВАЖНО!!! Принимает параметер только стринг и стрингБуфер!!!, метод фреймворка Спринг!! 
 		 * Метод вывода текста на  ХТМЛ  страницу через джава скрипт  model.addAttribute("result",ВАЖНО!! чтобы имя написанное в методе как 1 параметр, 
 		 * И написанное на ХТМЛ странице в скипте имя в фигурных скобках  document.write("${result}"); совпадали полностью !!!
@@ -71,9 +73,10 @@ public class MappingController {
 	@RequestMapping({"/update_actions"})
 	public String updateProcessingPage(String category, String free_question, Model model){	
 		/** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.
-		 * Возвращает готовую форму для размещения в в таге див (например).
+		 * Возвращает
 		 */
 		String result = DBservice.UpdateQuestionInDataBase(free_question, category);
+		logger.log(result);
 		model.addAttribute("result", result);// text on page for testing
 		return "UpdatePage";// return too page after action		
 	}

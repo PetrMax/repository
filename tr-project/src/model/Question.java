@@ -9,8 +9,9 @@ public class Question {
 	public Question() {	}
 
 	@Id 	
-	String question;
-	String category;
+	String question = "How to...";
+	String sampleQuestion;
+	String category;	
 	int level;
 
 	@OneToMany(mappedBy = "quest")
@@ -32,10 +33,16 @@ public class Question {
 	}
 	protected void setLevel(int level) {
 		this.level = level;
+	}	
+	protected String getSampleQuestion() {
+		return sampleQuestion;
+	}
+	protected void setSampleQuestion(String sampleQuestion) {
+		this.sampleQuestion = sampleQuestion;
 	}
 	@Override
 	public String toString() {
-		return "Question " + question + ", category=" + category
-				+ ", level=" + level;
+		return question + ";<br> category=" + category + ";<br> level=" + level;
 	}
+
 }

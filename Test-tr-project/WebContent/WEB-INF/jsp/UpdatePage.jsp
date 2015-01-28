@@ -6,21 +6,46 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Show Tale All Questions</title>
 
+
+
 <style type="text/css">
 body {
 	text-align: center;
 }
+
+td:hover {
+	background-color: yellow;
+}
+
+td {
+	border: 0.1em solid black;
+}
+
+table {
+	border: 0.1em solid black;
+	width: 90%;
+}
 </style>
 </head>
 <body>
+	<script type="text/javascript">
+		function test(val) {			
+			alert(val);
 
+		}
+	</script>
 	<form action="update_actions">
-	<input type="text" name="free_question" value="free question" size="50"> <input type="submit" value="SEARCH"><br>
-		<br><input type="text" name="category" value="java"> <input type="submit" value="Select Category">				
+		<input onclick="test(value)" type="text" name="free_question"
+			value="free question" size="50"> <input type="submit"
+			value="SEARCH"><br> <br>
+		<input type="text" name="category" value="java"> <input
+			type="submit" value="Select Category">
 	</form>
-<br>
+	<br>
 	<script type="text/javascript">
 		document.write("${result}");
 	</script>
+<br><br>
+
 </body>
 </html>

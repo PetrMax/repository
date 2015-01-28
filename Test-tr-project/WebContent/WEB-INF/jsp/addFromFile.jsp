@@ -11,13 +11,14 @@
 body{
 	text-align: center;
 }
+
 </style>
 
 </head>
 <body>
 	<br> Please choice specific file to fill data base
 	<br>
-	<form action="add_from_file_actions">
+	<form action="add_from_file_actions"><!-- action='http://localhost...' method=post enctype='multipart/form-data' -->
 		<input type="file" name="file_name"><br>
 		<input type="submit">
 	</form>	

@@ -1,2 +1,2 @@
-00001,,Wha the tag does not exist?,,HTML,,3,,<em>1,,<address>2,,<pre>3,,<ol>4,,1
-00002,,Pete is necessary to make a numbered list, some of the tags it should be used?,,HTML,,1,,<ul>1,,<list>2,,<ol>3,,<tr>4,,2
+What the tag does not exist?/,,/example text/,,/HTML/,,/3/,,/<em>/,,/<address>/,,/<pre>/,,/<ol>/,,/1
+Peter is necessary to make a numbered list, some of the tags it should be used?/,,/example text/,,/HTML/,,/1/,,/<ul>/,,/<list>/,,/<ol>/,,/<tr>/,,/2 
