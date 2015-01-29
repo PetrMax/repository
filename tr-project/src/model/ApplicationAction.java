@@ -9,4 +9,5 @@ public interface ApplicationAction {//общий интерфейс
 	boolean createQuestion(String question,String sample_question_text,String category,int level,List<String> answers,int trueAnswerNumber);
 	String UpdateQuestionInDataBase(String question, String category);
 	boolean AddQuestionsFromFile(String FileName);
+	String SearchQuestionInDataBase(String question, String category);
 }

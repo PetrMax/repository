@@ -1,6 +1,7 @@
 package model;
 import java.util.List;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -8,14 +9,23 @@ import javax.persistence.OneToMany;
 public class Question {
 	public Question() {	}
 
-	@Id 	
-	String question = "How to...";
-	String sampleQuestion;
-	String category;	
-	int level;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id=0;
 
-	@OneToMany(mappedBy = "quest")
-	List<Answer> answers;
+	@Id 
+	@Column(columnDefinition="TEXT")
+	private String question = "How to...";
+	@Column(columnDefinition="TEXT")
+	private String sampleQuestion;
+	private String category;	
+	private int level;
+
+	@OneToMany(mappedBy = "quest")	
+	List<Answer> answers;	
+
+	public long getId() {
+		return id;
+	}
 	protected String getQuestion() {
 		return question;
 	}
@@ -42,7 +52,8 @@ public class Question {
 	}
 	@Override
 	public String toString() {
-		return question + ";<br> category=" + category + ";<br> level=" + level;
+		return "Question: " + question + "<br> Sample Question Text: "
+				+ sampleQuestion + "<br> Category - " + category + "<br> level="
+				+ level;
 	}
-
 }

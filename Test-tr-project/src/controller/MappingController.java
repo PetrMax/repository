@@ -70,13 +70,24 @@ public class MappingController {
 	}
 
 	/***  ОБНОВЛЕНИЕ ВОПРОСОВ действия разрешены Администратору системы  */
-	@RequestMapping({"/update_actions"})
+	/*@RequestMapping({"/update_actions"})
 	public String updateProcessingPage(String category, String free_question, Model model){	
+		*//** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.
+		 * Возвращает
+		 *//*
+		String result = DBservice.UpdateQuestionInDataBase(free_question, category);
+		logger.log(result);
+		model.addAttribute("result", result);// text on page for testing
+		return "UpdatePage";// return too page after action		
+	}*/
+	
+	/***  ПОИСК ВОПРОСОВ действия разрешены Администратору системы  */
+	@RequestMapping({"/update_actions"})
+	public String searchProcessingPage(String category, String free_question, Model model){	
 		/** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.
 		 * Возвращает
 		 */
-		String result = DBservice.UpdateQuestionInDataBase(free_question, category);
-		logger.log(result);
+		String result = DBservice.SearchQuestionInDataBase(free_question, category);		
 		model.addAttribute("result", result);// text on page for testing
 		return "UpdatePage";// return too page after action		
 	}

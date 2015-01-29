@@ -61,5 +61,8 @@ function newCategory(){
 	<script type="text/javascript">
 		document.write("${result}");
 	</script>
+	<br>
+	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
+	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
 </body>
 </html>

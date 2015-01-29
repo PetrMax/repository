@@ -4,48 +4,57 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Show Tale All Questions</title>
-
-
+<title>UPDATE</title>
 
 <style type="text/css">
 body {
 	text-align: center;
 }
-
-td:hover {
-	background-color: yellow;
-}
-
-td {
-	border: 0.1em solid black;
-}
-
-table {
-	border: 0.1em solid black;
-	width: 90%;
-}
 </style>
-</head>
-<body>
-	<script type="text/javascript">
-		function test(val) {			
-			alert(val);
+<script type="text/javascript">
 
-		}
-	</script>
-	<form action="update_actions">
-		<input onclick="test(value)" type="text" name="free_question"
-			value="free question" size="50"> <input type="submit"
-			value="SEARCH"><br> <br>
-		<input type="text" name="category" value="java"> <input
-			type="submit" value="Select Category">
+</script>
+</head>
+<body>	
+	<form action="add_actions">
+	Please input question text
+		<input id="questionText" type="text" name="question_text" value="here"><br> 
+		
+		Please input sample question text
+		<input id="exampleQuestionText" type="text" name="sample_question_text" value="here"><br> 		
+		
+		
+		Please select a Category of Question: <br>
+		C# <input id="" type="checkbox" name="category" value="C#" />
+		Java <input id="" type="checkbox" name="category" value="Java" />
+		C++ <input id=""	type="checkbox" name="category" value="C++" /> <br>	
+		Insert another Category<br>
+		 <input id=""	type="text" name="category" value="" /><br>			
+			 Please	select Level for Question<br>
+			 1<input id="" type="radio"	name="question_level" value=1 checked="checked">
+			 2<input id="" type="radio" name="question_level" value=2>
+			 3<input id="" type="radio" name="question_level" value=3>
+			 4<input id="" type="radio" name="question_level" value=4>
+			 5<input id="" type="radio" name="question_level" value=5> <br> 
+			
+			
+			
+		Please input Answer to this Question<br>
+		Answer 1 <input id="" type="text" name="answer_text_1" value="input text"> <br>
+		Answer 2 <input id="" type="text" name="answer_text_2" value="input text"> <br> 
+		Answer 3 <input id="" type="text" name="answer_text_3" value="input text"> <br>
+		Answer 4 <input id="" type="text" name="answer_text_4"value="input text"> <br>
+		
+		Please input number a right	question answer<br>
+		 <input type="text" name="trueAnswerNumber"	value="1"><br> <input type="submit">
 	</form>
 	<br>
+	
 	<script type="text/javascript">
 		document.write("${result}");
 	</script>
-<br><br>
-
+	<br>
+	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
+	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
 </body>
 </html>

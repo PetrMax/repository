@@ -21,26 +21,28 @@ public class WorkActionClass implements ApplicationAction {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	// работа с транзакциями 
 	public boolean createQuestion(String question,String sample_question_text, String category,	int level, List<String> answers, int trueAnswerNumber) {
-		boolean result = false; 
-		if(em.find(Question.class, question) == null){// searching  if question not exist
-			Question qwtemp = new Question();// creating table question and setting data
-			qwtemp.setQuestion(question);
-			qwtemp.setQuestion(sample_question_text);
-			qwtemp.setCategory(category);
-			qwtemp.setLevel(level);	
-			//обходим лист стрингов который пришел как параметер  List<String> answers и добавляем ответы в БД
-			for(String str :answers){
-				addAnswersList(str,trueAnswerNumber); // с помощью Этого метода // adding answer
-			}
-			j=1;	  			
-			em.persist(qwtemp);// sending to database
-			result = true;// return to client result of operation
-		}		
-		// small test case for showing a work transfer protocols
-		System.out.println(question + " "+category+" "+level+" "+answers+" "+trueAnswerNumber);
+		boolean result = false;	
+		Question qwtemp = new Question();
+		// searching  if question not exist
+		if(em.find(Question.class, question) == null){
+		// creating table question and setting data
+		qwtemp.setQuestion(question);
+		qwtemp.setSampleQuestion(sample_question_text);
+		qwtemp.setCategory(category);
+		qwtemp.setLevel(level);	
+		//обходим лист стрингов который пришел как параметер  List<String> answers и добавляем ответы в БД
+		for(String str :answers){
+			addAnswersList(str,trueAnswerNumber); // с помощью Этого метода // adding answer
+		}
+		j=1;	  			
+		em.persist(qwtemp);// sending to database
+		result = true;// return to client result of operation
+		}
+		System.out.println("small test case for showing a work transfer protocols");
+		System.out.println(question + "| "+sample_question_text+ "| "+category+"| "+level+"| "+answers+"| "+trueAnswerNumber);
 		return result;
 	}
-
+	/** method for Creating Table Answer in DB */
 	private void addAnswersList(String answer, int trueAnswerNumber) {		
 		Answer temp = new Answer();// creating table answer
 		temp.setAnswerText(answer);// adding text answer 
@@ -55,19 +57,52 @@ public class WorkActionClass implements ApplicationAction {
 
 	@SuppressWarnings("unchecked")
 	@Override	
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	// работа с транзакциями //logger.log(str);
 	public String UpdateQuestionInDataBase(String question, String category) {
 		StringBuffer str;		
-		List<Object> res = em.createQuery(
-				"SELECT c FROM Question c WHERE c.question LIKE :custName").setParameter("custName","%"+question+"%").getResultList();// return to client result of operation		
-		str = new StringBuffer();
-		str.append("<table>");
-		for( Object obj:res){			
-			str.append("<tr><td onclick='test(value)' value='"+obj.toString()+"'>"+obj.toString()+"</tr></td>");
-		}	
-		str.append("</table><br>");	
-		//logger.log(str);
+		List<Question> res = em.createQuery(
+				"SELECT c FROM Question c WHERE c.question LIKE :custName").setParameter("custName",""+question+"%").getResultList();// return to client result of operation			
+		str = new StringBuffer();	
+		for( Question obj:res){	
+			obj.setQuestion(question);
+			obj.setSampleQuestion(question);// WRONG FILTER !!!!!!!!!!!!!!!!!!!!!!
+			obj.setCategory(category);
+			obj.setLevel(5);
+			//em.persist(obj);
+			/*Query res = em.createQuery(
+			"SELECT c FROM Question c WHERE c.question=?1");
+	List out = res.setParameter(1, question).getResultList();
+
+	Object f = out.get(0);
+	String s = f.toString();
+	String[] r = s.split(":", 1);
+	logger.log(r);
+	//System.out.println(f);
+	if(f.equals(question)){
+		System.out.println("sdfghjklkjhgfd");
+	}*/
+			
+		}			
+		
 		return str.toString();
 	}	
+
+	/** ЗАПРОС В БД По вопросу, словам из вопроса, или букве(нескольким буквам типа  J2EE) */
+	@SuppressWarnings("unchecked")
+	@Override	
+	public String SearchQuestionInDataBase(String question, String category) {
+		StringBuffer str;		
+		List<Question> res = em.createQuery(
+				"SELECT c FROM Question c WHERE c.question LIKE :custName").setParameter("custName","%"+question+"%").getResultList();// return to client result of operation			
+		str = new StringBuffer();
+		str.append("<table>");
+		for( Question obj:res){				
+			str.append("<tr><td onclick='test(value)' value='"+obj.getId()+"'>"+obj.toString()+"</tr></td>");
+		}	
+		str.append("</table><br>");			
+		return str.toString();
+	}	
+
 
 	@Override	
 	public boolean AddQuestionsFromFile(String FileName) {
