@@ -2,17 +2,16 @@ package model;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import org.apache.openjpa.persistence.jdbc.Index;
 @Entity
 public class Question {
 	public Question() {	}
-
+	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id=0;
 
-	@Id 
+	@Index
 	@Column(columnDefinition="TEXT")
 	private String question = "How to...";
 	@Column(columnDefinition="TEXT")

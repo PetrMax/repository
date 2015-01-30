@@ -18,15 +18,24 @@ color:blue;
 a:HOVER {
 	color:orange;
 }
+
+td {
+	border: 0.1em solid black;
+}
+
+table {
+	border: 0.1em solid black;
+	width: 90%;
+}
 </style>
 </head>
 <body>
 <br>
 <!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
 
-<a href="http://localhost:8085/Test-tr-project/add">1. create new question</a>
+<a href="http://localhost:8085/Test-tr-project/add">1. Create new question</a>
 <br>
-<a href="http://localhost:8085/Test-tr-project/update">2. Update Question</a>
+<a href="http://localhost:8085/Test-tr-project/search">2. Update Question</a>
 <br>
 <a href="http://localhost:8085/Test-tr-project/addfromfile">3. Adding questions from file</a>
 <br>

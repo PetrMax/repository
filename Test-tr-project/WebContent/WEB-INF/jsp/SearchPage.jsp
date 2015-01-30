@@ -19,6 +19,7 @@ td {
 }
 
 table {
+
 	border: 0.1em solid black;
 	width: 90%;
 }
@@ -26,17 +27,15 @@ table {
 </head>
 <body>
 	<script type="text/javascript">
-		function test(val) {			
-			alert(val);
-
+		function test(val) {		
+			//alert("test");
+	window.open("http://localhost:8085/Test-tr-project/update","parent","width=450px height=600px");
 		}
 	</script>
-	<form action="update_actions">
+	<form action="search_actions">
 		<input onclick="test(value)" type="text" name="free_question"
 			value="free question" size="50"> <input type="submit"
-			value="SEARCH"><br> <br>
-	<!-- 	<input type="text" name="category" value="java"> <input
-			type="submit" value="Select Category"> -->
+			value="SEARCH"><br> 	
 	</form>
 	<br>
 	<script type="text/javascript">

@@ -8,8 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
-import log.logger;
-
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,10 +19,11 @@ public class WorkActionClass implements ApplicationAction {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	// работа с транзакциями 
 	public boolean createQuestion(String question,String sample_question_text, String category,	int level, List<String> answers, int trueAnswerNumber) {
+
 		boolean result = false;	
 		Question qwtemp = new Question();
 		// searching  if question not exist
-		if(em.find(Question.class, question) == null){
+		//if(em.find(Question.class, question) == null){
 		// creating table question and setting data
 		qwtemp.setQuestion(question);
 		qwtemp.setSampleQuestion(sample_question_text);
@@ -37,7 +36,7 @@ public class WorkActionClass implements ApplicationAction {
 		j=1;	  			
 		em.persist(qwtemp);// sending to database
 		result = true;// return to client result of operation
-		}
+		//}
 		System.out.println("small test case for showing a work transfer protocols");
 		System.out.println(question + "| "+sample_question_text+ "| "+category+"| "+level+"| "+answers+"| "+trueAnswerNumber);
 		return result;
@@ -55,39 +54,35 @@ public class WorkActionClass implements ApplicationAction {
 		em.persist(temp);// добавляем данные в БД
 	}
 
+	/** Метод апдейт , берет вопрос и обновляет его данными полученными от администратораCHANGE Question */
 	@SuppressWarnings("unchecked")
 	@Override	
-	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	// работа с транзакциями //logger.log(str);
-	public String UpdateQuestionInDataBase(String question, String category) {
+	//@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)	// работа с транзакциями //logger.log(str);
+	public String UpdateQuestionInDataBase(String question, String category) {		
 		StringBuffer str;		
 		List<Question> res = em.createQuery(
-				"SELECT c FROM Question c WHERE c.question LIKE :custName").setParameter("custName",""+question+"%").getResultList();// return to client result of operation			
+				"SELECT c FROM Question c WHERE c.question LIKE :custName").setParameter("custName",question).getResultList();// return to client result of operation			
 		str = new StringBuffer();	
-		for( Question obj:res){	
+		/*for( Question obj:res){
 			obj.setQuestion(question);
 			obj.setSampleQuestion(question);// WRONG FILTER !!!!!!!!!!!!!!!!!!!!!!
 			obj.setCategory(category);
 			obj.setLevel(5);
-			//em.persist(obj);
-			/*Query res = em.createQuery(
+			em.persist(obj);
+			Query res = em.createQuery(
 			"SELECT c FROM Question c WHERE c.question=?1");
 	List out = res.setParameter(1, question).getResultList();
+		}*/
 
-	Object f = out.get(0);
-	String s = f.toString();
-	String[] r = s.split(":", 1);
-	logger.log(r);
-	//System.out.println(f);
-	if(f.equals(question)){
-		System.out.println("sdfghjklkjhgfd");
-	}*/
-			
-		}			
-		
+		str.append("<table>");
+		for( Question obj:res){				
+			str.append("<tr><td onclick='test(value)' value='"+obj.getId()+"'>"+obj.toString()+"</tr></td>");
+		}	
+		str.append("</table><br>");		
 		return str.toString();
 	}	
 
-	/** ЗАПРОС В БД По вопросу, словам из вопроса, или букве(нескольким буквам типа  J2EE) */
+	/** ЗАПРОС В БД По вопросу, словам из вопроса, или букве(нескольким буквам типа  J2EE) SEARCH Question  */
 	@SuppressWarnings("unchecked")
 	@Override	
 	public String SearchQuestionInDataBase(String question, String category) {
@@ -108,7 +103,7 @@ public class WorkActionClass implements ApplicationAction {
 	public boolean AddQuestionsFromFile(String FileName) {
 		boolean res = false;	
 		try {
-			readLocalFile();//logger.log(FileName);
+			readLocalFile(FileName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,22 +111,18 @@ public class WorkActionClass implements ApplicationAction {
 		return res;
 	}
 
-	private void readLocalFile() throws Exception {		
-		BufferedReader input = new BufferedReader(new FileReader("D:/developer-workspaces/out_project/tr-project/bild.txt")); 
+	private void readLocalFile(String fileName) throws Exception {		
+		BufferedReader input = new BufferedReader(new FileReader("D:/developer-workspaces/out_project/tr-project/"+fileName)); 
 		String line; 
 		while((line = input.readLine()) != null){ 
-			String[] question_Parts = line.split("/,,/"); 
-			logger.log(question_Parts);
-			int trueAnswerNumber = Integer.parseInt(question_Parts[8]); 
+			String[] question_Parts = line.split(":;;:"); 				
+			Integer trueAnswerNumber = Integer.parseInt(question_Parts[8]); 
 			List<String> answers = new ArrayList<String>();
 			answers.add(question_Parts[4]);		answers.add(question_Parts[5]);
-			answers.add(question_Parts[6]);		answers.add(question_Parts[7]);
-			logger.log(answers);
+			answers.add(question_Parts[6]);		answers.add(question_Parts[7]);			
 			int level = Integer.parseInt(question_Parts[3]);
 			createQuestion(question_Parts[0], question_Parts[1], question_Parts[2], level, answers, trueAnswerNumber);
-
 		}
 	}
-
 }
 

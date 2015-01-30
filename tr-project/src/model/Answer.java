@@ -15,8 +15,7 @@ public class Answer {
 	protected boolean answer;
 	protected String answerText;
 
-	@ManyToOne
-	@JoinTable(name="Answer")
+	@ManyToOne	
 	Question quest;
 
 	protected long getKeyQuestion() {

@@ -7,8 +7,24 @@
 <title>UPDATE</title>
 
 <style type="text/css">
-body {
+body{
 	text-align: center;
+}
+a{
+font-size:2em;
+color:blue;
+}
+a:HOVER {
+	color:orange;
+}
+
+td {
+	border: 0.1em solid black;
+}
+
+table {
+	border: 0.1em solid black;
+	width: 90%;
 }
 </style>
 <script type="text/javascript">
@@ -16,7 +32,7 @@ body {
 </script>
 </head>
 <body>	
-	<form action="add_actions">
+	<form action="update_actions">
 	Please input question text
 		<input id="questionText" type="text" name="question_text" value="here"><br> 
 		
@@ -25,28 +41,28 @@ body {
 		
 		
 		Please select a Category of Question: <br>
-		C# <input id="" type="checkbox" name="category" value="C#" />
-		Java <input id="" type="checkbox" name="category" value="Java" />
-		C++ <input id=""	type="checkbox" name="category" value="C++" /> <br>	
+		C# <input  type="checkbox" name="category" value="C#" />
+		Java <input  type="checkbox" name="category" value="Java" />
+		C++ <input 	type="checkbox" name="category" value="C++" /> <br>	
 		Insert another Category<br>
-		 <input id=""	type="text" name="category" value="" /><br>			
+		 <input id="category"	type="text" name="category" value="" /><br>			
 			 Please	select Level for Question<br>
-			 1<input id="" type="radio"	name="question_level" value=1 checked="checked">
-			 2<input id="" type="radio" name="question_level" value=2>
-			 3<input id="" type="radio" name="question_level" value=3>
-			 4<input id="" type="radio" name="question_level" value=4>
-			 5<input id="" type="radio" name="question_level" value=5> <br> 
+			 1<input  type="radio"	name="question_level" value=1 checked="checked">
+			 2<input  type="radio" name="question_level" value=2>
+			 3<input  type="radio" name="question_level" value=3>
+			 4<input  type="radio" name="question_level" value=4>
+			 5<input id="levelChange" type="radio" name="question_level" value=5> <br> 
 			
 			
 			
 		Please input Answer to this Question<br>
-		Answer 1 <input id="" type="text" name="answer_text_1" value="input text"> <br>
-		Answer 2 <input id="" type="text" name="answer_text_2" value="input text"> <br> 
-		Answer 3 <input id="" type="text" name="answer_text_3" value="input text"> <br>
-		Answer 4 <input id="" type="text" name="answer_text_4"value="input text"> <br>
+		Answer 1 <input id="answ_t_1" type="text" name="answer_text_1" value="input text"> <br>
+		Answer 2 <input id="" type="answ_t_2" name="answer_text_2" value="input text"> <br> 
+		Answer 3 <input id="" type="answ_t_3" name="answer_text_3" value="input text"> <br>
+		Answer 4 <input id="" type="answ_t_4" name="answer_text_4"value="input text"> <br>
 		
 		Please input number a right	question answer<br>
-		 <input type="text" name="trueAnswerNumber"	value="1"><br> <input type="submit">
+		 <input id="trueAnswNum" type="text" name="trueAnswerNumber"	value="1"><br> <input type="submit">
 	</form>
 	<br>
 	
@@ -56,5 +72,7 @@ body {
 	<br>
 	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
 	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
+	<br>
+	<a href="http://localhost:8085/Test-tr-project/search">Back to Search</a>
 </body>
 </html>

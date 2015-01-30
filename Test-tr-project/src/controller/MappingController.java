@@ -24,6 +24,9 @@ public class MappingController {
 	@RequestMapping({"/add"})
 	public String addingPage() {return "AddingPage";}
 
+	/** когда нажимаем на кнопку  update question!  этот метод только вызывает страницу updating view table page здесь писать ничего не надо!! !! */
+	@RequestMapping({"/search"})
+	public String SearchPage(){return "SearchPage";}
 
 	/** когда нажимаем на кнопку  update question!  этот метод только вызывает страницу updating view table page здесь писать ничего не надо!! !! */
 	@RequestMapping({"/update"})
@@ -65,33 +68,30 @@ public class MappingController {
 		 * Метод вывода текста на  ХТМЛ  страницу через джава скрипт  model.addAttribute("result",ВАЖНО!! чтобы имя написанное в методе как 1 параметр, 
 		 * И написанное на ХТМЛ странице в скипте имя в фигурных скобках  document.write("${result}"); совпадали полностью !!!
 		 * */
-
 		return "AddingPage"; // return too page after action
 	}
 
 	/***  ОБНОВЛЕНИЕ ВОПРОСОВ действия разрешены Администратору системы  */
-	/*@RequestMapping({"/update_actions"})
-	public String updateProcessingPage(String category, String free_question, Model model){	
-		*//** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.
-		 * Возвращает
-		 *//*
-		String result = DBservice.UpdateQuestionInDataBase(free_question, category);
-		logger.log(result);
+	@RequestMapping({"/update_actions"})
+	public String updateProcessingPage(String question_text,String sample_question_text,
+			String category,int question_level,String answer_text_1,String answer_text_2,String answer_text_3,String answer_text_4 ,int trueAnswerNumber,Model model){		
+
+		String result = DBservice.UpdateQuestionInDataBase(question_text, category);	
 		model.addAttribute("result", result);// text on page for testing
 		return "UpdatePage";// return too page after action		
-	}*/
-	
+	}
+
 	/***  ПОИСК ВОПРОСОВ действия разрешены Администратору системы  */
-	@RequestMapping({"/update_actions"})
+	@RequestMapping({"/search_actions"})
 	public String searchProcessingPage(String category, String free_question, Model model){	
 		/** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.
 		 * Возвращает
 		 */
 		String result = DBservice.SearchQuestionInDataBase(free_question, category);		
 		model.addAttribute("result", result);// text on page for testing
-		return "UpdatePage";// return too page after action		
+		return "SearchPage";// return too page after action		
 	}
-	
+
 	/** ДОБАВЛЕНИЕ БОЛЬШОГО КОЛИЧЕСТВА ВОПРОСОВ ОДНОВРЕМЕННО С ПОМОЩЬЮ ФАЙЛА */
 	@RequestMapping({"/add_from_file_actions"})
 	public String addFromFileProcessingPage(String file_name, Model model){
