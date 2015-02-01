@@ -9,7 +9,7 @@
 </head>
 <body>	
 <!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
-	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
+	<a href="http://localhost:8080/Test-tr-project/"> Home Page</a>
 	
     <p>Creating new Question </p>
 	<form action="add_actions">
