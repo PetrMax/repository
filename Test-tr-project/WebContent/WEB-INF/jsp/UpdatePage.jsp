@@ -90,7 +90,7 @@ function fillAnswerText(){
 </head>
 <body>	
 	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
-<a href="http://localhost:8085/Test-tr-project/">Home Page</a><br>
+<a href="http://localhost:8080/Test-tr-project/">Home Page</a><br>
 	<p onclick="test('test JS')">Update - Change  issues</p>
 	<form  name="searchCODE" action="search_actions">
 		<input  type="text" name="free_question" size="50">
@@ -107,7 +107,7 @@ function fillAnswerText(){
 		 <input type="text" name="category" value="" /><br> 
 		Question Level<br>	
 		<input type="radio" name="question_level" value=1>1	<!-- checked="checked" -->
-		<input type="radio" name="question_level" value=2>2
+		<input type="radio" name="question_level" value=2>2 <!-- если параметер не выбран будет ошибка 500 !!! -->
 		<input type="radio" name="question_level" value=3>3
 		<input type="radio" name="question_level" value=4>4
 		<input type="radio" name="question_level" value=5>5 
