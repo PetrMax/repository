@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="D:\developer-workspaces\GitHub\repository\repository\Test-tr-project\WebContent\WEB-INF\css\style.css"/>
+<link rel="stylesheet" type="text/css" href="*\css\style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Adding From File</title>
 </head>
