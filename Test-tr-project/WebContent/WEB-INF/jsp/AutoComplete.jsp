@@ -4,18 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="D:\developer-workspaces\out_project\Test-tr-project\WebContent\WEB-INF\css\style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Adding From File</title>
-
-<style type="text/css" >
-body{
-	text-align: center;
-}
-
-</style>
-
 </head>
 <body>
+<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
+	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
+	
+    <p> Auto Complete Data Base from external file</p>
 	<br> Please choice specific file to fill data base
 	<br>
 	<form action="add_from_file_actions"><!-- action='http://localhost...' method=post enctype='multipart/form-data' -->
@@ -26,8 +23,6 @@ body{
 	<script type="text/javascript">
 		document.write("${result}");//вывод текста
 	</script>
-	<br>
-	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
-	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
+		
 </body>
 </html>

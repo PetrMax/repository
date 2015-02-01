@@ -2,8 +2,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import log.logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,23 +17,17 @@ public class MappingController {
 	@RequestMapping({"/"})
 	public String homePage() {return "HomePage";}
 
-
 	/** когда нажимаем на кнопку add question! этот метод только вызывает страницу adding page здесь писать ничего не надо!! */
 	@RequestMapping({"/add"})
-	public String addingPage() {return "AddingPage";}
-
-	/** когда нажимаем на кнопку  update question!  этот метод только вызывает страницу updating view table page здесь писать ничего не надо!! !! */
-	@RequestMapping({"/search"})
-	public String SearchPage(){return "SearchPage";}
+	public String addingPage() {return "AddingPage";}	
 
 	/** когда нажимаем на кнопку  update question!  этот метод только вызывает страницу updating view table page здесь писать ничего не надо!! !! */
 	@RequestMapping({"/update"})
 	public String UpdatePage(){return "UpdatePage";}
 
-
 	/** когда нажимаем на кнопку add from file! этот метод только вызывает страницу adding page  здесь писать ничего не надо!!!! */
 	@RequestMapping({"/addfromfile"})
-	public String specificDataPage(){return "addFromFile";}
+	public String specificDataPage(){return "AutoComplete";}
 
 	/** ДОБАВЛЕНИЕ НОВОГО ВОПРОСА В БАЗУ ДАННЫХ */
 	@RequestMapping({"/add_actions"})
@@ -57,39 +49,50 @@ public class MappingController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		// альтернативный путь , если ответа от сервиса небыло по любым причинам.
-		if (!actionRes) {
+		if (actionRes) {
 			// написать альтернативный путь !!!
+			model.addAttribute("result","<p> Question successfully added</p>");// вывод текста
+			actionRes=false;
+		}else{
+			model.addAttribute("result","<p> Error adding the question, the question already exists. Try again</p>");// вывод текста
 		}
-
-		model.addAttribute("result",question_text+sample_question_text+category+question_level+answer_text_1+trueAnswerNumber );// вывод текста
 		/**ВАЖНО!!! Принимает параметер только стринг и стрингБуфер!!!, метод фреймворка Спринг!! 
 		 * Метод вывода текста на  ХТМЛ  страницу через джава скрипт  model.addAttribute("result",ВАЖНО!! чтобы имя написанное в методе как 1 параметр, 
 		 * И написанное на ХТМЛ странице в скипте имя в фигурных скобках  document.write("${result}"); совпадали полностью !!!
 		 * */
 		return "AddingPage"; // return too page after action
 	}
-
+	////////////////////////////////////////////////////////////////////////////////////////
 	/***  ОБНОВЛЕНИЕ ВОПРОСОВ действия разрешены Администратору системы  */
 	@RequestMapping({"/update_actions"})
-	public String updateProcessingPage(String question_text,String sample_question_text,
-			String category,int question_level,String answer_text_1,String answer_text_2,String answer_text_3,String answer_text_4 ,int trueAnswerNumber,Model model){		
+	public String updateProcessingPage(String questionText,String descriptionText,
+			String category,int question_level,
+			String answer_text_1,String answer_text_2,String answer_text_3,String answer_text_4 ,
+			int trueAnswerNumber,Model model,String GHANGEQUESTION){	
 
-		String result = DBservice.UpdateQuestionInDataBase(question_text, category);	
+		/** this value comming from javascript in page SearchPage.jsp  !!!!! not work correctly  !!!!*/
+		// string to int, column ID - integer number from table Question for search question in DB and change it./*autoincrement genereted value */ 
+		String questionKey = "1"; /// тут надо передать айди обьекта для замены, получаем его когда жмем на вопрос в таблице 
+
+		//when you submit form getting query to DB, and update form with parameters and text of question 
+		String actionKey = GHANGEQUESTION;
+		List<String> answer = new ArrayList<String>();
+		answer.add(answer_text_1);		answer.add(answer_text_2);
+		answer.add(answer_text_3);		answer.add(answer_text_4);
+
+		String result = DBservice.UpdateQuestionInDataBase(questionKey, actionKey, questionText, descriptionText, category, question_level, answer, trueAnswerNumber);	
 		model.addAttribute("result", result);// text on page for testing
 		return "UpdatePage";// return too page after action		
 	}
-
+	///////////////////////////////////////////////////////////////////////////////////////
 	/***  ПОИСК ВОПРОСОВ действия разрешены Администратору системы  */
 	@RequestMapping({"/search_actions"})
 	public String searchProcessingPage(String category, String free_question, Model model){	
-		/** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.
-		 * Возвращает
-		 */
+		/** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.*/
 		String result = DBservice.SearchQuestionInDataBase(free_question, category);		
 		model.addAttribute("result", result);// text on page for testing
-		return "SearchPage";// return too page after action		
+		return "UpdatePage";// return too page after action		
 	}
 
 	/** ДОБАВЛЕНИЕ БОЛЬШОГО КОЛИЧЕСТВА ВОПРОСОВ ОДНОВРЕМЕННО С ПОМОЩЬЮ ФАЙЛА */

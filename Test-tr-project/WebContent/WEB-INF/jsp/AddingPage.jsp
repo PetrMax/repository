@@ -3,32 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="D:\developer-workspaces\out_project\Test-tr-project\WebContent\WEB-INF\css\style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ADDING</title>
-
-<style type="text/css">
-body {
-	text-align: center;
-}
-</style>
-<script type="text/javascript">
-function newCategory(){
-	var res;
-	alert("work");
-	res = prompt("Type Category Name", "Java");
-	alert(res);	
-	var d = res + '<input	type="checkbox" name="category" value="'+res+'" /> <br>'
-	alert(d);
-	//document.getElementById("testss").HTMLElement = d;
-}
-</script>
 </head>
 <body>	
+<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
+	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
+	
+    <p>Creating new Question </p>
 	<form action="add_actions">
-	Please input question text
+	Please input Question text<br>
 		<input type="text" name="question_text" value="here"><br> 
 		
-		Please input sample question text
+		Please input Description text<br>
 		<input type="text" name="sample_question_text" value="here"><br> 		
 		
 		
@@ -39,7 +27,7 @@ function newCategory(){
 		Insert another Category<br>
 		 <input	type="text" name="category" value="" /><br>			
 			 Please	select Level for Question<br>
-			 1<input type="radio"	name="question_level" value=1 checked="checked">
+			 1<input type="radio" name="question_level" value=1 checked="checked">
 			 2<input type="radio" name="question_level" value=2>
 			 3<input type="radio" name="question_level" value=3>
 			 4<input type="radio" name="question_level" value=4>
@@ -54,15 +42,13 @@ function newCategory(){
 		Answer 4 <input type="text" name="answer_text_4"value="input text"> <br>
 		
 		Please input number a right	question answer<br>
-		 <input type="text" name="trueAnswerNumber"	value="1"><br> <input type="submit">
+		 <input type="text" name="trueAnswerNumber"	value="1"><br> 
+		 <input type="submit" value="Add To DataBase">
 	</form>
 	<br>
 	
 	<script type="text/javascript">
 		document.write("${result}");
-	</script>
-	<br>
-	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
-	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
+	</script>	
 </body>
 </html>

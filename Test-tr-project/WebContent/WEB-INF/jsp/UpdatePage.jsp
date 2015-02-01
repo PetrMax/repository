@@ -3,76 +3,130 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="D:\developer-workspaces\out_project\Test-tr-project\WebContent\WEB-INF\css\style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>UPDATE</title>
-
-<style type="text/css">
-body{
-	text-align: center;
-}
-a{
-font-size:2em;
-color:blue;
-}
-a:HOVER {
-	color:orange;
-}
-
-td {
-	border: 0.1em solid black;
-}
-
-table {
-	border: 0.1em solid black;
-	width: 90%;
-}
-</style>
 <script type="text/javascript">
+function test(questionId) {		
+		alert(questionId+"<- num ID of question. This alert from line 11 UpdatePage.jsp ");
+	var FORM_C = document.getElementsByName("formTag")[0];
+	var att = document.createAttribute("style");
+	att.value = "display:block";
+	FORM_C.setAttributeNode(att);
+	
+	var SEARCH_Q = document.getElementsByName("searchCODE")[0];
+	var att = document.createAttribute("style");
+	att.value = "display:none";
+	SEARCH_Q.setAttributeNode(att);
+	
+	var RES_TQ = document.getElementsByTagName("div")[0];
+	var att = document.createAttribute("style");
+	att.value = "display:none";
+	RES_TQ.setAttributeNode(att);
+	
+	//fillQuestionText();
+	//fillAnswerText();
+	}
+	
+// все закоментированное работает , 
+ //но в него нечего ложить , на этапе поиска мы запрашиваем БД , 
+ //а при выборе нужного вопроса для изменения, мы работаем только в жс(жава скрипт)
+ //надо сделать снова запрос в БД чтоб она вернула параметры выбранного вопроса !! 
+ //и вот эти параметры и надо записать туда где подписано.
+ // тут то я и застрял :(
+ /*
+function fillQuestionText(){	
+	// question fill case
+	var QT = document.getElementsByName("questionText")[0];
+	 var att = document.createAttribute("value");
+	att.value = "question text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	QT.setAttributeNode(att); 
+	// description fill case
+	var DT = document.getElementsByName("descriptionText")[0];
+	 var att = document.createAttribute("value");
+	att.value = "description text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	DT.setAttributeNode(att);
+	// category fill case
+	var CAT = document.getElementsByName("category")[0];
+	 var att = document.createAttribute("value");
+	att.value = "Category fo Question";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	CAT.setAttributeNode(att);
+	// question level fill case
+	var QL = document.getElementsByName("question_level")[1];// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	var att = document.createAttribute("checked");
+	att.value = "checked";
+	QL.setAttributeNode(att);	
+}
 
+function fillAnswerText(){	
+	// ----------------------
+	var AT_1 = document.getElementsByName("answer_text_1")[0];
+	 var att = document.createAttribute("value");
+	att.value = "answer text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	AT_1.setAttributeNode(att); 
+	// -------------------
+	var AT_2 = document.getElementsByName("answer_text_2")[0];
+	 var att = document.createAttribute("value");
+	att.value = "answer text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	AT_2.setAttributeNode(att);
+	// -------------------
+	var AT_3 = document.getElementsByName("answer_text_3")[0];
+	 var att = document.createAttribute("value");
+	att.value = "answer text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	AT_3.setAttributeNode(att);
+	// -----------------------------
+	var AT_4 = document.getElementsByName("answer_text_4")[0];// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	var att = document.createAttribute("value");
+	att.value = "answer text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	AT_4.setAttributeNode(att);
+	//-------- true answer number --
+	var RA = document.getElementsByName("trueAnswerNumber")[0];// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	var att = document.createAttribute("value");
+	att.value = "2";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	RA.setAttributeNode(att);	
+} 
+*/
 </script>
 </head>
 <body>	
-	<form action="update_actions">
-	Please input question text
-		<input id="questionText" type="text" name="question_text" value="here"><br> 
-		
-		Please input sample question text
-		<input id="exampleQuestionText" type="text" name="sample_question_text" value="here"><br> 		
-		
-		
-		Please select a Category of Question: <br>
-		C# <input  type="checkbox" name="category" value="C#" />
-		Java <input  type="checkbox" name="category" value="Java" />
-		C++ <input 	type="checkbox" name="category" value="C++" /> <br>	
-		Insert another Category<br>
-		 <input id="category"	type="text" name="category" value="" /><br>			
-			 Please	select Level for Question<br>
-			 1<input  type="radio"	name="question_level" value=1 checked="checked">
-			 2<input  type="radio" name="question_level" value=2>
-			 3<input  type="radio" name="question_level" value=3>
-			 4<input  type="radio" name="question_level" value=4>
-			 5<input id="levelChange" type="radio" name="question_level" value=5> <br> 
-			
-			
-			
-		Please input Answer to this Question<br>
-		Answer 1 <input id="answ_t_1" type="text" name="answer_text_1" value="input text"> <br>
-		Answer 2 <input id="" type="answ_t_2" name="answer_text_2" value="input text"> <br> 
-		Answer 3 <input id="" type="answ_t_3" name="answer_text_3" value="input text"> <br>
-		Answer 4 <input id="" type="answ_t_4" name="answer_text_4"value="input text"> <br>
-		
-		Please input number a right	question answer<br>
-		 <input id="trueAnswNum" type="text" name="trueAnswerNumber"	value="1"><br> <input type="submit">
+	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
+<a href="http://localhost:8085/Test-tr-project/">Home Page</a><br>
+	<p onclick="test('test JS')">Update - Change  issues</p>
+	<form  name="searchCODE" action="search_actions">
+		<input  type="text" name="free_question" size="50">
+		 <input type="submit"	value="SEARCH"><br> 	
 	</form>
 	<br>
-	
+
+	<form name="formTag" action="update_actions" class="addingClassCss">
+		Question text<br>
+		 <input type="text" name="questionText" value=""><br>
+		Description text<br> 
+		<input type="text"	name="descriptionText" value=""><br>
+		Question Category<br>
+		 <input type="text" name="category" value="" /><br> 
+		Question Level<br>	
+		<input type="radio" name="question_level" value=1>1	<!-- checked="checked" -->
+		<input type="radio" name="question_level" value=2>2
+		<input type="radio" name="question_level" value=3>3
+		<input type="radio" name="question_level" value=4>4
+		<input type="radio" name="question_level" value=5>5 
+		<br> Answers for Question <br>
+		 Answer 1 <input type="text" name="answer_text_1" value=""> <br>
+		 Answer 2 <input type="text" name="answer_text_2" value=""> <br> 
+		 Answer 3 <input type="text" name="answer_text_3" value=""> <br>
+		 Answer 4 <input type="text" name="answer_text_4" value=""> <br>
+
+		 Please input number a right question answer<br>
+		 <input	type="text" name="trueAnswerNumber" value="" size="2"><br> 
+		 <input type="submit" value="changeQuestion" name="GHANGEQUESTION">
+	</form>
+	<br>
+
+	<div >
 	<script type="text/javascript">
 		document.write("${result}");
 	</script>
-	<br>
-	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
-	<a href="http://localhost:8085/Test-tr-project/"> Home Page</a>
-	<br>
-	<a href="http://localhost:8085/Test-tr-project/search">Back to Search</a>
+	</div>	
 </body>
 </html>

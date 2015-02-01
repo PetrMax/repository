@@ -1,24 +1,34 @@
 package model;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
-
-import org.apache.openjpa.persistence.jdbc.Index;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 @Entity
-public class Question {
+public class Question implements Serializable {
+	private static final long serialVersionUID = 1L;
+	// constructor by default
 	public Question() {	}
-	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id=0;
+	//column 1 id (long)
+	@Id
+	@Column(name="ID")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "my_entity_seq_gen")
+	@SequenceGenerator(name = "my_entity_seq_gen", sequenceName = "catalog_seq")
+	private long id;
+	// column 2 question text	
+	@Column(name="QUESTIONTEXT",unique = true, nullable = false, length = 500)
+	private String questionText;
+	//column 3 description text
+	@Column(name="DESCRIPTION",unique = false, nullable = false, length = 100)	
+	private String description;		
 
-	@Index
-	@Column(columnDefinition="TEXT")
-	private String question = "How to...";
-	@Column(columnDefinition="TEXT")
-	private String sampleQuestion;
 	private String category;	
-	private int level;
-
+	private int level;	
 	@OneToMany(mappedBy = "quest")	
 	List<Answer> answers;	
 
@@ -26,10 +36,10 @@ public class Question {
 		return id;
 	}
 	protected String getQuestion() {
-		return question;
+		return questionText;
 	}
 	protected void setQuestion(String question) {
-		this.question = question;
+		this.questionText = question;
 	}
 	protected String getCategory() {
 		return category;
@@ -43,16 +53,15 @@ public class Question {
 	protected void setLevel(int level) {
 		this.level = level;
 	}	
-	protected String getSampleQuestion() {
-		return sampleQuestion;
+	protected String getDescription() {
+		return description;
 	}
-	protected void setSampleQuestion(String sampleQuestion) {
-		this.sampleQuestion = sampleQuestion;
+	protected void setDescription(String description) {
+		this.description = description;
 	}
 	@Override
 	public String toString() {
-		return "Question: " + question + "<br> Sample Question Text: "
-				+ sampleQuestion + "<br> Category - " + category + "<br> level="
-				+ level;
+		return id + ":" + questionText+ ":" + description + ":" + category	+ ":" + level;
 	}
+	
 }

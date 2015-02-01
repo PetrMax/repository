@@ -1,0 +1,40 @@
+@CHARSET "ISO-8859-1";
+
+*{
+	text-align: center;
+}
+
+td:hover {
+	background-color: yellow;
+	border:none;
+}
+
+td {
+	border: 0.01em solid black;
+}
+
+table {
+	border: 0.01em solid black;
+	width: 100%;
+}
+a {
+	font-size: 1.35em;
+	color: blue;
+}
+
+a:HOVER {
+	color: orange;
+}
+input:HOVER {
+	background-color: yellow;
+}
+.addingClassCss{
+	display: none;
+}
+.ResultTable{
+	display: block;
+}
+p{
+	color: blue;
+	border-bottom: 0.01em solid black;	
+}
