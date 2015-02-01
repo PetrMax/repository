@@ -134,7 +134,7 @@ public class WorkActionClass implements ApplicationAction {
 	private void readLocalFile(String fileName) throws Exception {	
 		String[] res = fileName.split(":");
 		if(res.length <= 1){
-			String temp = "D:/developer-workspaces/out_project/tr-project/"+fileName;
+			String temp = "D:/developer-workspaces/out_project/repository/tr-project/"+fileName;
 			fileName = temp;
 		}
 		BufferedReader input = new BufferedReader(new FileReader(fileName)); 
