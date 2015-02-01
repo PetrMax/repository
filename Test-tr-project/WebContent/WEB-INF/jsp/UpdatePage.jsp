@@ -8,8 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>UPDATE</title>
 <script type="text/javascript">
+
+var formText = new Array();
+
 function test(questionId) {		
 		alert(questionId+"<- num ID of question. This alert from line 11 UpdatePage.jsp ");
+		formText = requestFormsFromDB(questionId);
 	var FORM_C = document.getElementsByName("formTag")[0];
 	var att = document.createAttribute("style");
 	att.value = "display:block";
@@ -25,35 +29,34 @@ function test(questionId) {
 	att.value = "display:none";
 	RES_TQ.setAttributeNode(att);
 	
-	//fillQuestionText();
-	//fillAnswerText();
+	fillQuestionText();
+	fillAnswerText();
 	}
-	
-// все закоментированное работает , 
- //но в него нечего ложить , на этапе поиска мы запрашиваем БД , 
- //а при выборе нужного вопроса для изменения, мы работаем только в жс(жава скрипт)
- //надо сделать снова запрос в БД чтоб она вернула параметры выбранного вопроса !! 
- //и вот эти параметры и надо записать туда где подписано.
- // тут то я и застрял :(
- /*
+//надо сделать снова запрос в БД чтоб она вернула параметры выбранного вопроса !!  
+	function requestFormsFromDB(questionId){
+	alert("this alert from function requestFormsFromDB(questionId){ ,line 37 UpdatePage.jsp >>>>val>> "+questionId);
+		var res = ["question","description","JAVA","2","answer","answer","answer","answer","2"];
+		return res;
+	}
+ // все работает 
 function fillQuestionText(){	
 	// question fill case
 	var QT = document.getElementsByName("questionText")[0];
 	 var att = document.createAttribute("value");
-	att.value = "question text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	att.value = formText[0];
 	QT.setAttributeNode(att); 
 	// description fill case
 	var DT = document.getElementsByName("descriptionText")[0];
 	 var att = document.createAttribute("value");
-	att.value = "description text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	att.value = formText[1];
 	DT.setAttributeNode(att);
 	// category fill case
 	var CAT = document.getElementsByName("category")[0];
 	 var att = document.createAttribute("value");
-	att.value = "Category fo Question";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	att.value = formText[2];
 	CAT.setAttributeNode(att);
 	// question level fill case
-	var QL = document.getElementsByName("question_level")[1];// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	var QL = document.getElementsByName("question_level")[formText[3]];// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
 	var att = document.createAttribute("checked");
 	att.value = "checked";
 	QL.setAttributeNode(att);	
@@ -63,30 +66,30 @@ function fillAnswerText(){
 	// ----------------------
 	var AT_1 = document.getElementsByName("answer_text_1")[0];
 	 var att = document.createAttribute("value");
-	att.value = "answer text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	att.value = formText[4];
 	AT_1.setAttributeNode(att); 
 	// -------------------
 	var AT_2 = document.getElementsByName("answer_text_2")[0];
 	 var att = document.createAttribute("value");
-	att.value = "answer text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	att.value = formText[5];
 	AT_2.setAttributeNode(att);
 	// -------------------
 	var AT_3 = document.getElementsByName("answer_text_3")[0];
 	 var att = document.createAttribute("value");
-	att.value = "answer text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	att.value = formText[6];
 	AT_3.setAttributeNode(att);
 	// -----------------------------
-	var AT_4 = document.getElementsByName("answer_text_4")[0];// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	var AT_4 = document.getElementsByName("answer_text_4")[0];
 	var att = document.createAttribute("value");
-	att.value = "answer text from DB";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	att.value = formText[7];
 	AT_4.setAttributeNode(att);
 	//-------- true answer number --
-	var RA = document.getElementsByName("trueAnswerNumber")[0];// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	var RA = document.getElementsByName("trueAnswerNumber")[0];
 	var att = document.createAttribute("value");
-	att.value = "2";// сюда надо положить цифру из вопроса, учитываем что отсчет идет с '0'
+	att.value = formText[8];
 	RA.setAttributeNode(att);	
 } 
-*/
+
 </script>
 </head>
 <body>	
@@ -128,6 +131,10 @@ function fillAnswerText(){
 	<script type="text/javascript">
 		document.write("${result}");
 	</script>
-	</div>	
+	</div>
+	
+	<br>
+	<br>
+
 </body>
 </html>
