@@ -9,10 +9,15 @@
 
 var formText = new Array();
 
-function test(questionId) {		
-		alert(questionId+"<- num ID of question. This alert from line 11 UpdatePage.jsp ");
-		formText = requestFormsFromDB(questionId);
-	var FORM_C = document.getElementsByName("formTag")[0];
+    function test(questionId) {		
+    	var FORM_C = document.getElementsByName("questionKey")[0];
+    	var att = document.createAttribute("value");
+    	att.value = questionId;
+    	FORM_C.setAttributeNode(att);		
+      }
+    
+	function work(){		
+    var FORM_C = document.getElementsByName("formTag")[0];
 	var att = document.createAttribute("style");
 	att.value = "display:block";
 	FORM_C.setAttributeNode(att);
@@ -27,16 +32,14 @@ function test(questionId) {
 	att.value = "display:none";
 	RES_TQ.setAttributeNode(att);
 	
+	var formText = ("${textArray}");
+	 confirm(formText);
+	 
 	fillQuestionText();
-	fillAnswerText();
+    fillAnswerText();
 	}
-//надо сделать снова запрос в БД чтоб она вернула параметры выбранного вопроса, думаю надо сделать метод в сервисе специально для этого действия   
-// или вызвать метод из класса мапинг контроллер и передать туда параметер , но как получить обратно текст??
-	function requestFormsFromDB(questionId){
-	alert("this alert from function requestFormsFromDB(questionId){ ,line 37 UpdatePage.jsp >>>>val>> "+questionId);
-		var res = ["question","description","JAVA","2","answer","answer","answer","answer","2"];
-		return res;
-	}
+
+	//-------------------------------------------------------------------------------------------------------------
  // все работает 
 function fillQuestionText(){	
 	// question fill case
@@ -59,6 +62,7 @@ function fillQuestionText(){
 	var att = document.createAttribute("checked");
 	att.value = "checked";
 	QL.setAttributeNode(att);	
+	
 }
 // все работает 
 function fillAnswerText(){	
@@ -86,8 +90,13 @@ function fillAnswerText(){
 	var RA = document.getElementsByName("trueAnswerNumber")[0];
 	var att = document.createAttribute("value");
 	att.value = formText[8];
-	RA.setAttributeNode(att);	
-} 
+	RA.setAttributeNode(att);
+	// hidden input 
+	var HI_ID = document.getElementsByName("questionID")[0];
+	var att = document.createAttribute("value");
+	att.value = formText[9];
+	HI_ID.setAttributeNode(att);
+	} 
 
 </script>
 <style type="text/css">
@@ -106,18 +115,40 @@ input:HOVER {
 	background-color: yellow;
 }
 .addingClassCss{
-	display: none;
+	 display: none; 
+}
+td:hover {
+	background-color: yellow;
+	border:none;
+}
+
+td {
+	border: 0.01em solid black;
+}
+
+table {
+	border: 0.01em solid black;
+	width: 100%;
+}
+p{
+	color: blue;
+	border-bottom: 0.01em solid black;	
 }
 </style>
 </head>
 <body>	
 <a href="http://localhost:8080/Test-tr-project/">Home Page</a><br>
-	<p onclick="test('test JS')">Update - Change  issues</p><!-- test working java script in this jsp file -->
+	<p onclick="test('1')">Update - Change  issues</p><!-- test working java script in this jsp file -->
 	<form  name="searchCODE" action="search_actions">
-		<input  type="text" name="free_question" size="50">
+		 <input  type="text" name="free_question" size="50">
 		 <input type="submit"	value="SEARCH"><br> 	
 	</form>
 	<br>
+	<form name="searchCODE" action="getArrayFromDB">
+	<input	type="text" name="questionKey" size="8">&nbsp;&nbsp; 
+    <input type="submit" value="Edit Question" >
+    </form>
+	
 
 	<form name="formTag" action="update_actions" class="addingClassCss">
 		Question text<br>
@@ -140,16 +171,15 @@ input:HOVER {
 
 		 Please input number a right question answer<br>
 		 <input	type="text" name="trueAnswerNumber" value="" size="2"><br> 
-		 <input type="submit" value="changeQuestion" name="GHANGEQUESTION">
+		 <input	type="text" name="questionID" value="" style="visibility: hidden;"><br> 
+		 <input type="submit" value="Change Question" >
 	</form>
-	<br>
-
-	<div >
+	<br>	
+	<div>
 	<script type="text/javascript">
 		document.write("${result}");
 	</script>
-	</div>
-	
+	</div>	
 	<br>
 	<br>
 

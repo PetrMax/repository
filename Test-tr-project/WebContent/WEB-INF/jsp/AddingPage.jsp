@@ -12,7 +12,6 @@ a {
 	font-size: 1.35em;
 	color: blue;
 }
-
 a:HOVER {
 	color: orange;
 }

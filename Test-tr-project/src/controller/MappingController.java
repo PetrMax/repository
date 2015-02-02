@@ -2,6 +2,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import log.logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,30 +64,21 @@ public class MappingController {
 		 * И написанное на ХТМЛ странице в скипте имя в фигурных скобках  document.write("${result}"); совпадали полностью !!!
 		 * */
 		return "AddingPage"; // return too page after action
-	}
-	////////////////////////////////////////////////////////////////////////////////////////
+	}	
 	/***  ОБНОВЛЕНИЕ ВОПРОСОВ действия разрешены Администратору системы  */
 	@RequestMapping({"/update_actions"})
 	public String updateProcessingPage(String questionText,String descriptionText,
 			String category,int question_level,
 			String answer_text_1,String answer_text_2,String answer_text_3,String answer_text_4 ,
-			int trueAnswerNumber,Model model,String GHANGEQUESTION){	
-
-		/** this value comming from javascript in page SearchPage.jsp  !!!!! not work correctly  !!!!*/
-		// string to int, column ID - integer number from table Question for search question in DB and change it./*autoincrement genereted value */ 
-		String questionKey = "1"; /// тут надо передать айди обьекта для замены, получаем его когда жмем на вопрос в таблице 
-
-		//when you submit form getting query to DB, and update form with parameters and text of question 
-		String actionKey = GHANGEQUESTION;
+			int trueAnswerNumber,String questionID,Model model){	
+		//when you submit form getting query to DB, and update form with parameters and text of question 		
 		List<String> answer = new ArrayList<String>();
 		answer.add(answer_text_1);		answer.add(answer_text_2);
 		answer.add(answer_text_3);		answer.add(answer_text_4);
-
-		String result = DBservice.UpdateQuestionInDataBase(questionKey, actionKey, questionText, descriptionText, category, question_level, answer, trueAnswerNumber);	
+		String result = DBservice.UpdateQuestionInDataBase(questionID, questionText, descriptionText, category, question_level, answer, trueAnswerNumber);	
 		model.addAttribute("result", result);// text on page for testing
 		return "UpdatePage";// return too page after action		
-	}
-	///////////////////////////////////////////////////////////////////////////////////////
+	}	
 	/***  ПОИСК ВОПРОСОВ действия разрешены Администратору системы  */
 	@RequestMapping({"/search_actions"})
 	public String searchProcessingPage(String category, String free_question, Model model){	
@@ -94,7 +87,6 @@ public class MappingController {
 		model.addAttribute("result", result);// text on page for testing
 		return "UpdatePage";// return too page after action		
 	}
-
 	/** ДОБАВЛЕНИЕ БОЛЬШОГО КОЛИЧЕСТВА ВОПРОСОВ ОДНОВРЕМЕННО С ПОМОЩЬЮ ФАЙЛА */
 	@RequestMapping({"/add_from_file_actions"})
 	public String addFromFileProcessingPage(String file_name, Model model){
@@ -103,5 +95,15 @@ public class MappingController {
 		model.addAttribute("result"," Adding Questions is - "+actionRes);// вывод текста
 		res = "HomePage";
 		return 	res;// return too page after action
+	}
+	/** Промежуточный поиск вопроса для заполнения формы для изменения вопроса*/
+	@RequestMapping({"/getArrayFromDB"})
+	public String getArrayFromDB(String questionKey, Model model){
+		logger.log(questionKey);
+		String result = DBservice.getArrayStringFromDB(questionKey);
+		
+		model.addAttribute("textArray",result);// вывод текста
+		logger.log(result);
+		return "UpdatePage";		
 	}
 }
