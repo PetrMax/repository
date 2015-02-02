@@ -3,8 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<!-- <link rel="stylesheet" type="text/css" href="*\Test-tr-project\WebContent\WEB-INF\css\style.css"/> -->
-<link rel="stylesheet" type="text/css" href="D:\developer-workspaces\out_project\repository\Test-tr-project\WebContent\WEB-INF\css\style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>UPDATE</title>
 <script type="text/javascript">
@@ -32,7 +30,8 @@ function test(questionId) {
 	fillQuestionText();
 	fillAnswerText();
 	}
-//надо сделать снова запрос в БД чтоб она вернула параметры выбранного вопроса !!  
+//надо сделать снова запрос в БД чтоб она вернула параметры выбранного вопроса, думаю надо сделать метод в сервисе специально для этого действия   
+// или вызвать метод из класса мапинг контроллер и передать туда параметер , но как получить обратно текст??
 	function requestFormsFromDB(questionId){
 	alert("this alert from function requestFormsFromDB(questionId){ ,line 37 UpdatePage.jsp >>>>val>> "+questionId);
 		var res = ["question","description","JAVA","2","answer","answer","answer","answer","2"];
@@ -61,7 +60,7 @@ function fillQuestionText(){
 	att.value = "checked";
 	QL.setAttributeNode(att);	
 }
-
+// все работает 
 function fillAnswerText(){	
 	// ----------------------
 	var AT_1 = document.getElementsByName("answer_text_1")[0];
@@ -91,11 +90,29 @@ function fillAnswerText(){
 } 
 
 </script>
+<style type="text/css">
+*{
+	text-align: center;
+}
+a {
+	font-size: 1.35em;
+	color: blue;
+}
+
+a:HOVER {
+	color: orange;
+}
+input:HOVER {
+	background-color: yellow;
+}
+.addingClassCss{
+	display: none;
+}
+</style>
 </head>
 <body>	
-	<!--  ВАЖНО!!!!!!!!! замени порты для работы в своей среде !!!!! стандартный порт: http://localhost:8080/Test-tr-project -->
 <a href="http://localhost:8080/Test-tr-project/">Home Page</a><br>
-	<p onclick="test('test JS')">Update - Change  issues</p>
+	<p onclick="test('test JS')">Update - Change  issues</p><!-- test working java script in this jsp file -->
 	<form  name="searchCODE" action="search_actions">
 		<input  type="text" name="free_question" size="50">
 		 <input type="submit"	value="SEARCH"><br> 	
