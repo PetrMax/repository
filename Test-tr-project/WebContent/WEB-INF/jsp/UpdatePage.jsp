@@ -9,14 +9,21 @@
 
 var formText = new Array();
 
-    function test(questionId) {		
+    function test(questionId) {	
+    	var EDIT_Q = document.getElementsByName("editing")[0];
+    	var att = document.createAttribute("style");
+    	att.value = "display:block";
+    	EDIT_Q.setAttributeNode(att);	
+    	
     	var FORM_C = document.getElementsByName("questionKey")[0];
     	var att = document.createAttribute("value");
     	att.value = questionId;
-    	FORM_C.setAttributeNode(att);		
+    	FORM_C.setAttributeNode(att);	
+    	formText = ("${textArray}");
       }
-    
-	function work(){		
+    alert(formText);
+	function work(){	
+		
     var FORM_C = document.getElementsByName("formTag")[0];
 	var att = document.createAttribute("style");
 	att.value = "display:block";
@@ -27,16 +34,18 @@ var formText = new Array();
 	att.value = "display:none";
 	SEARCH_Q.setAttributeNode(att);
 	
+	var EDIT_Q = document.getElementsByName("editing")[0];
+	var att = document.createAttribute("style");
+	att.value = "display:block";
+	EDIT_Q.setAttributeNode(att);	
+	
 	var RES_TQ = document.getElementsByTagName("div")[0];
 	var att = document.createAttribute("style");
 	att.value = "display:none";
 	RES_TQ.setAttributeNode(att);
-	
-	var formText = ("${textArray}");
-	 confirm(formText);
-	 
-	fillQuestionText();
-    fillAnswerText();
+			
+	//fillQuestionText();
+   // fillAnswerText();
 	}
 
 	//-------------------------------------------------------------------------------------------------------------
@@ -134,6 +143,9 @@ p{
 	color: blue;
 	border-bottom: 0.01em solid black;	
 }
+.editingAction{
+display: none;
+}
 </style>
 </head>
 <body>	
@@ -144,7 +156,7 @@ p{
 		 <input type="submit"	value="SEARCH"><br> 	
 	</form>
 	<br>
-	<form name="searchCODE" action="getArrayFromDB">
+	<form name="editing"  class="editingAction" action="getArrayFromDB">
 	<input	type="text" name="questionKey" size="8">&nbsp;&nbsp; 
     <input type="submit" value="Edit Question" >
     </form>
