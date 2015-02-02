@@ -61,7 +61,7 @@ public class Question implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return id + ":" + questionText+ ":" + description + ":" + category	+ ":" + level;
+		return id + ":" + questionText+ ":" + description + ":" + category	+ ":" + level+ ":";
 	}
 	
 }

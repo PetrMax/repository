@@ -19,11 +19,11 @@ var formText = new Array();
     	var att = document.createAttribute("value");
     	att.value = questionId;
     	FORM_C.setAttributeNode(att);	
-    	formText = ("${textArray}");
+    	
       }
-    alert(formText);
+  //  alert(formText); 
 	function work(){	
-		
+		formText = ("${textArray}");
     var FORM_C = document.getElementsByName("formTag")[0];
 	var att = document.createAttribute("style");
 	att.value = "display:block";
@@ -44,8 +44,8 @@ var formText = new Array();
 	att.value = "display:none";
 	RES_TQ.setAttributeNode(att);
 			
-	//fillQuestionText();
-   // fillAnswerText();
+	fillQuestionText();
+   fillAnswerText();
 	}
 
 	//-------------------------------------------------------------------------------------------------------------

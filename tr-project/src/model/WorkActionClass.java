@@ -33,12 +33,16 @@ public class WorkActionClass implements ApplicationAction {
 			qwtemp.setDescription(descriptionText);
 			qwtemp.setCategory(category);
 			qwtemp.setLevel(level);
+			em.persist(qwtemp);// sending to database (commit)
+
+			long keyQuestion = qwtemp.getId();
 			//обходим лист стрингов который пришел как параметер  List<String> answers и добавляем ответы в БД
-			for (String str : answers) {
-				addAnswersList(str, trueAnswerNumber); // с помощью Этого метода // adding answer
+			for (String str : answers) {				
+				addAnswersList(str, trueAnswerNumber, keyQuestion); // с помощью Этого метода // adding answer
+				j++;
 			}
 			j = 1;
-			em.persist(qwtemp);// sending to database (commit)
+
 			result = true;// return to client result of operation
 		}else{
 			em.clear();
@@ -49,16 +53,16 @@ public class WorkActionClass implements ApplicationAction {
 		return result;
 	}
 
-	/** method for Creating Table Answer in DB */
-	private void addAnswersList(String answer, int trueAnswerNumber) {		
+	/** method for Creating Table Answer in DB 	 */
+	private void addAnswersList(String answer, int trueAnswerNumber, long keyQuestion) {		
 		Answer temp = new Answer();// creating table answer
+		temp.setKeyQuestion(keyQuestion);
 		temp.setAnswerText(answer);// adding text answer 
 		if(trueAnswerNumber == (int)j){
 			temp.setAnswer(true);// adding boolean if true/false this answer 
 		}else{
 			temp.setAnswer(false);// adding boolean if true/false this answer 
 		}
-		temp.setNumberOfAnswer(j++);		
 		em.persist(temp);// добавляем данные в БД
 	}
 	//////////////////////////////////////////////////////////////////////////////////////
@@ -143,20 +147,24 @@ public class WorkActionClass implements ApplicationAction {
 		}
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	@SuppressWarnings("unchecked")
 	@Override
-	public String getArrayStringFromDB(String questionKey) {
-		String  outRes = "1:2:3:4:5:6:7:8:9:"+questionKey;
+	public String getInformation(String questionKey) {
+		StringBuffer  outRes = new StringBuffer();
 		long id = (long)Integer.parseInt(questionKey);
-		logger.log(questionKey);
-		logger.log(id);
-		
-		/*List<Question> res = em.createQuery(
-				"SELECT c FROM Question c INNER JOIN Answer a ON :custName").setParameter("custName",id).getResultList();// return to client result of operation			
-		for(Question line:res){	
-
-		}*/
-		return outRes;	
+		List<Question> question = em.createQuery(
+				"SELECT c FROM Question c WHERE c.id LIKE :custName").setParameter("custName",id).getResultList();// return to client result of operation
+		List<Answer> answers = em.createQuery(
+				"SELECT c FROM Answer c WHERE c.keyQuestion LIKE :custName").setParameter("custName",id).getResultList();// return to client result of operation	
+		for(Question q: question){
+			outRes.append(q);
+		}
+		for(Answer an:answers){
+			outRes.append(an);
+		}
+	
+		logger.log(outRes.toString());		
+		return outRes.toString();	
 	}
 }
 

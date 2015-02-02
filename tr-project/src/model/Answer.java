@@ -1,4 +1,5 @@
 package model;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,12 +8,13 @@ import javax.persistence.ManyToOne;
 public class Answer {
 	public Answer() {}
 	@Id
+	@Column(name="ID")
 	@GeneratedValue
-	protected long keyQuestion;
+	long id;
+	private long keyQuestion;
 
-	protected int numberOfAnswer;
-	protected boolean answer;
-	protected String answerText;
+	private boolean isAnswer;
+	private String answerText;
 
 	@ManyToOne	
 	Question quest;
@@ -23,17 +25,11 @@ public class Answer {
 	protected void setKeyQuestion(long keyQuestion) {
 		this.keyQuestion = keyQuestion;
 	}
-	protected int getNumberOfAnswer() {
-		return numberOfAnswer;
+	public boolean isAnswer() {
+		return isAnswer;
 	}
-	protected void setNumberOfAnswer(int numberOfAnswer) {
-		this.numberOfAnswer = numberOfAnswer;
-	}
-	protected boolean isAnswer() {
-		return answer;
-	}
-	protected void setAnswer(boolean answer) {
-		this.answer = answer;
+	public void setAnswer(boolean isAnswer) {
+		this.isAnswer = isAnswer;
 	}
 	protected String getAnswerText() {
 		return answerText;
@@ -49,7 +45,7 @@ public class Answer {
 	}
 	@Override
 	public String toString() {
-		return answerText;
+		return answerText +":"+isAnswer+ ":";
 	}
 
 

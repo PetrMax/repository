@@ -98,9 +98,9 @@ public class MappingController {
 	}
 	/** Промежуточный поиск вопроса для заполнения формы для изменения вопроса*/
 	@RequestMapping({"/getArrayFromDB"})
-	public String getArrayFromDB(String questionKey, Model model){
+	public String getInformationDB(String questionKey, Model model){
 		logger.log(questionKey);
-		String result = DBservice.getArrayStringFromDB(questionKey);
+		String result = DBservice.getInformation(questionKey);
 		
 		model.addAttribute("textArray",result);// вывод текста
 		logger.log(result);
