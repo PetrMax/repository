@@ -7,7 +7,10 @@ public interface ApplicationAction {//общий интерфейс
 	//ВАЖНО ЭТО ИНТЕРФЕЙС !!!-СЕРВИС-!!! при изменениях ихменить инрерфейс !!!-ТЕСТ-!!!.
 
 	boolean createQuestion(String questionText,String descriptionText,String category,int level,List<String> answers,int trueAnswerNumber);
-	public String UpdateQuestionInDataBase(String questionKey, String actionKey,String questionText,String descriptionText,String category, int level,List<String> answers,int trueAnswerNumber);
+	public String getArrayStringFromDB(String questionKey);
 	boolean AddQuestionsFromFile(String FileName);
 	String SearchQuestionInDataBase(String question, String category);
+	String UpdateQuestionInDataBase(String questionID, String questionText,
+			String descriptionText, String category, int question_level,
+			List<String> answer, int trueAnswerNumber);
 }
