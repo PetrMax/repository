@@ -121,7 +121,7 @@ public class WorkActionClass implements ApplicationAction {
 		for( Question questionLine :res){	
 			String line = questionLine.toString();
 			String[] element = line.split(":");
-			str.append("<tr><td onclick='test(value)' value='"+element[0]+"'>"+element[0]+". "+element[1]+"</td></tr>");
+			str.append("<tr><td onclick='test("+element[0]+")'>"+element[0]+". "+element[1]+"<br>   Category: "+element[3]+"</td></tr>");
 		}	
 		str.append("</table><br>");			
 		return str.toString();
@@ -180,6 +180,13 @@ public class WorkActionClass implements ApplicationAction {
 			outRes.append(an);
 		}			
 		return outRes.toString();	// return to client result of operation
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// method generate test Questions list for group Generate Tests
+	@Override
+	public List<String> GeneratedTestQuestion(String category, String level) {
+		List<String>  outResult = new ArrayList<String>();
+		return outResult;
 	}
 }
 

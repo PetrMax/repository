@@ -13,4 +13,6 @@ public interface ApplicationAction {//общий интерфейс
 	String UpdateQuestionInDataBase(String questionID, String questionText,
 			String descriptionText, String category, int question_level,
 			List<String> answer, int trueAnswerNumber);
+	// method for group generate test
+	List<String> GeneratedTestQuestion(String category,String level);
 }
