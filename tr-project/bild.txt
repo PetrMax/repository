@@ -1,17 +1,17 @@
-What the tag does not exist?:;;:example text:;;:HTML:;;:3:;;:<em>:;;:<address>:;;:<pre>:;;:<ol>:;;:1
-Peter is necessary to make a numbered list, some of the tags it should be used?:;;:example text:;;:HTML:;;:1:;;:<ul>:;;:<list>:;;:<ol>:;;:<tr>:;;:1
-The binary equivalent of 5.375 is?:;;:example text:;;:C:;;:2:;;:101.101110111:;;:101.011:;;:101011:;;:None of above:;;:2
-A pointer is:;;:example text:;;:C:;;:2:;;:A keyword used to create variables:;;:A variable that stores address of an instruction:;;:A variable that stores address of other variable:;;:All of the above:;;:3
-Bitwise & and | are unary operators?:;;:example text:;;:C:;;:1:;;:True:;;:False:;;:null:;;:null:;;:2
-Bitwise & can be used to check if more than one bit in a number is on?:;;:example text:;;:C:;;:1:;;:True:;;:False:;;:null:;;:null:;;:1
-Which of the following correctly shows the hierarchy of arithmetic operations in C?:;;:example text:;;:C:;;:1:;;:/+*-:;;:*-/+:;;:+-/:;;:*/*+-:;;:4
-Bitwise | can be used to set multiple bits in number?:;;:example text:;;:C:;;:1:;;:Yes:;;:No:;;:null:;;:null:;;:1
-Is standard library a part of C language?:;;:example text:;;:C:;;:1:;;:Yes:;;:No:;;:null:;;:null:;;:2
-The macro va_arg is used to extract an argument from the variable argument list and advance the pointer to the next argument?:;;:example text:;;:C:;;:1:;;:True:;;:False:;;:null:;;:null:;;:1
-malloc() allocates memory from the heap and not from the stack?:;;:example text:;;:C:;;:1:;;:True:;;:False:;;:null:;;:null:;;:1
-A pointer to a block of memory is effectively same as an array?:;;:example text:;;:C:;;:1:;;:True:;;:False:;;:null:;;:null:;;:1
-Does there any function exist to convert the int or float to a string?:;;:example text:;;:C:;;:1:;;:Yes:;;:No:;;:null:;;:null:;;:1
-Are the expressions arr and &arr same for an array of 10 integers?:;;:example text:;;:C:;;:1:;;:Yes:;;:No:;;:null:;;:null:;;:2
-How will you free the allocated memory ?:;;:example text:;;:C:;;:1:;;:remove(var-name);:;;:free(var-name);:;;:delete(var-name);:;;:dalloc(var-name);:;;:2
-Which of the following are correctly formed #define statements in C?:;;:example text:;;:C:;;:1:;;:#define CUBE (X) (X*X*X);:;;:#define CUBE(x) (X*X*X):;;:#define CUBE(X)(X*X*X):;;:#define CUBE(X) {X*X*X}:;;:3
-A preprocessor directive is a message from compiler to a linker?:;;:example text:;;:C:;;:1:;;:True:;;:False:;;:null:;;:null:;;:2
+What the tag does not exist?:;;:Description:;;:HTML:;;:3:;;:<em>:;;:<address>:;;:<pre>:;;:<ol>:;;:1
+Peter is necessary to make a numbered list, some of the tags it should be used?:;;:Description:;;:HTML:;;:1:;;:<ul>:;;:<list>:;;:<ol>:;;:<tr>:;;:1
+The binary equivalent of 5.375 is?:;;:Description:;;:C:;;:2:;;:101.101110111:;;:101.011:;;:101011:;;:None of above:;;:2
+A pointer is:;;:Description:;;:C:;;:2:;;:A keyword used to create variables:;;:A variable that stores address of an instruction:;;:A variable that stores address of other variable:;;:All of the above:;;:3
+Bitwise & and | are unary operators?:;;:Description:;;:C:;;:1:;;:True:;;:False:;;:0:;;:0:;;:2
+Bitwise & can be used to check if more than one bit in a number is on?:;;:example text:;;:C:;;:1:;;:True:;;:False:;;:0:;;:0:;;:1
+Which of the following correctly shows the hierarchy of arithmetic operations in C?:;;:Description:;;:C:;;:1:;;:/+*-:;;:*-/+:;;:+-/:;;:*/*+-:;;:4
+Bitwise | can be used to set multiple bits in number?:;;:example text:;;:C:;;:1:;;:Yes:;;:No:;;:0:;;:0:;;:1
+Is standard library a part of C language?:;;:Description:;;:C:;;:1:;;:Yes:;;:No:;;:0:;;:0:;;:2
+The macro va_arg is used to extract an argument from the variable argument list and advance the pointer to the next argument?:;;:Description:;;:C:;;:1:;;:True:;;:False:;;:0:;;:0:;;:1
+malloc() allocates memory from the heap and not from the stack?:;;:Description:;;:C:;;:1:;;:True:;;:False:;;:0:;;:0:;;:1
+A pointer to a block of memory is effectively same as an array?:;;:Description:;;:C:;;:1:;;:True:;;:False:;;:0:;;:0:;;:1
+Does there any function exist to convert the int or float to a string?:;;:Description:;;:C:;;:1:;;:Yes:;;:No:;;:0:;;:0:;;:1
+Are the expressions arr and &arr same for an array of 10 integers?:;;:Description:;;:C:;;:1:;;:Yes:;;:No:;;:0:;;:0:;;:2
+How will you free the allocated memory ?:;;:Description:;;:C:;;:1:;;:remove(var-name);:;;:free(var-name);:;;:delete(var-name);:;;:dalloc(var-name);:;;:2
+Which of the following are correctly formed #define statements in C?:;;:Description:;;:C:;;:1:;;:#define CUBE (X) (X*X*X);:;;:#define CUBE(x) (X*X*X):;;:#define CUBE(X)(X*X*X):;;:#define CUBE(X) {X*X*X}:;;:3
+A preprocessor directive is a message from compiler to a linker?:;;:Description:;;:C:;;:1:;;:True:;;:False:;;:0:;;:0:;;:2

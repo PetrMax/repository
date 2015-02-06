@@ -5,10 +5,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 @Entity
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -17,8 +15,7 @@ public class Question implements Serializable {
 	//column 1 id (long)
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "my_entity_seq_gen")
-	@SequenceGenerator(name = "my_entity_seq_gen", sequenceName = "catalog_seq")
+	@GeneratedValue	
 	private long id;
 	// column 2 question text	
 	@Column(name="QUESTIONTEXT",unique = true, nullable = false, length = 500)
