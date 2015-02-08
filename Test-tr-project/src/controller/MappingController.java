@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping({"/"})
 public class MappingController {	
 	@Autowired// аннотация делающая автоматический  вызов через тег в бин.хмл файле.
-	ApplicationAction DBservice;// Это связь интерфейсов , эта переменная дает нам все методы интерфейса !!!-СЕРВИС-!!!  DBservice. + горячие клавиши Ctrl+пробел. и далее выбираем из списка.
+	ApplicationAction maintenanceService;// Это связь интерфейсов , эта переменная дает нам все методы интерфейса !!!-СЕРВИС-!!!  DBservice. + горячие клавиши Ctrl+пробел. и далее выбираем из списка.
 
 	/**когда запускаем аппликации, метод дает домашнюю страницу !! */
 	@RequestMapping({"/"})
@@ -44,9 +44,9 @@ public class MappingController {
 
 		boolean actionRes = false; // флаг работы апликации
 		try {
-			actionRes = DBservice.createQuestion(question_text,sample_question_text,
+			actionRes = maintenanceService.createQuestion(question_text,sample_question_text,
 					category, question_level, answer, trueAnswerNumber);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		// альтернативный путь , если ответа от сервиса небыло по любым причинам.
@@ -74,7 +74,7 @@ public class MappingController {
 		List<String> answer = new ArrayList<String>();
 		answer.add(answer_text_1);		answer.add(answer_text_2);
 		answer.add(answer_text_3);		answer.add(answer_text_4);
-		String result = DBservice.UpdateQuestionInDataBase(questionID, questionText, descriptionText, category, question_level, answer, trueAnswerNumber);	
+		String result = maintenanceService.UpdateQuestionInDataBase(questionID, questionText, descriptionText, category, question_level, answer, trueAnswerNumber);	
 		model.addAttribute("result", result);// text on page for testing
 		return "UpdatePage";// return too page after action		
 	}	
@@ -82,7 +82,7 @@ public class MappingController {
 	@RequestMapping({"/search_actions"})
 	public String searchProcessingPage(String category, String free_question, Model model){	
 		/** это метод обновления вопроса, принимает String free_question: Это текст в свободной форме, для поиска вопроса.*/
-		String result = DBservice.SearchQuestionInDataBase(free_question, category);		
+		String result = maintenanceService.SearchQuestionInDataBase(free_question, category);		
 		model.addAttribute("result", result);// text on page for testing
 		return "UpdatePage";// return too page after action		
 	}
@@ -90,7 +90,7 @@ public class MappingController {
 	@RequestMapping({"/add_from_file_actions"})
 	public String addFromFileProcessingPage(String file_name, Model model){
 		String res = "addFromFile";		
-		boolean actionRes = DBservice.AddQuestionsFromFile(file_name);
+		boolean actionRes = maintenanceService.AddQuestionsFromFile(file_name);
 		model.addAttribute("result"," Adding Questions is - "+actionRes);// вывод текста
 		res = "HomePage";
 		return 	res;// return too page after action
@@ -99,7 +99,7 @@ public class MappingController {
 	@RequestMapping({"/getArrayFromDB"})
 	public String getInformationDB(String questionKey,Model model){	
 		StringBuffer  stringBufferOutResult = new StringBuffer();
-		String tempQueryRessult = DBservice.getInformation(questionKey);		
+		String tempQueryRessult = maintenanceService.getInformation(questionKey);		
 		String[] dataFromTables = tempQueryRessult.split(":");
 
 		stringBufferOutResult.append("<form name='formTag' action='update_actions' >");
